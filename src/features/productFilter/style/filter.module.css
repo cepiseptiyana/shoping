@@ -1,0 +1,55 @@
+.wraperForm {
+  & .header {
+    padding: var(--padding-all);
+    text-transform: capitalize;
+    font-family: sans-serif;
+    color: var(--gray-color);
+    border-bottom: 1px solid gray;
+  }
+
+  & .wraper {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    font-weight: 530;
+
+    & .checkboxWrapper {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 5px;
+      padding: var(--padding-all);
+      cursor: pointer;
+
+      & input {
+        display: none;
+      }
+
+      & .customBox {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #999;
+        border-radius: 4px;
+        transition: border-color 0.2s ease-in-out;
+      }
+
+      & input:checked + .customBox {
+        background-color: black;
+      }
+
+      & input:checked + .customBox::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+      }
+    }
+  }
+}

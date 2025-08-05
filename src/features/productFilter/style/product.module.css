@@ -1,0 +1,48 @@
+.wraper_product {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & .wraper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: var(--padding-all);
+
+    & .item {
+      width: 220px;
+      /* background-color: var(--primary-color); */
+      border: 1px solid gray;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      & figure {
+        padding: var(--padding-all);
+
+        & img {
+          width: 205px;
+        }
+      }
+
+      & .description {
+        padding: var(--padding-all);
+        white-space: nowrap; /* supaya teks tetap satu baris */
+        overflow: hidden; /* sembunyikan teks yang meluber */
+        text-overflow: ellipsis; /* tambahkan titik tiga (...) */
+        width: 80%; /* tentukan lebar agar efeknya berlaku */
+        display: block;
+      }
+    }
+
+    & .item:hover figure img {
+      transition-duration: 300ms;
+      transform: scale(1.05);
+    }
+  }
+}

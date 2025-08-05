@@ -1,0 +1,6 @@
+.container {
+  width: min(1600px, 95vw);
+  margin: auto;
+  /* background-color: rgb(33, 72, 90); */
+  padding-top: 88px;
+}

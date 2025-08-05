@@ -1,0 +1,37 @@
+.title {
+  position: relative;
+  text-transform: capitalize;
+  font-family: sans-serif;
+  color: var(--gray-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-all);
+
+  & .filter,
+  & .sort {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    & span {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  & .option {
+    position: absolute;
+    right: 0;
+    top: 100%;
+
+    & select {
+      width: 200px;
+      background-color: gray;
+      text-transform: capitalize;
+      font-size: var(--paragraph-size);
+      color: white;
+    }
+  }
+}
