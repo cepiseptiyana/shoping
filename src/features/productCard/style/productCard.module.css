@@ -15,22 +15,9 @@
   & .wrapper {
     background-color: white;
     display: flex;
+    flex-wrap: wrap;
     gap: var(--gap-all);
-    overflow-x: scroll;
     padding: var(--padding-all);
-
-    &::-webkit-scrollbar {
-      height: 2px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgb(122, 122, 122);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: blue;
-      cursor: pointer;
-    }
 
     & .item {
       background-color: white;

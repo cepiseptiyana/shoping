@@ -24,6 +24,9 @@ const NavbarComponent = () => {
             <Link to="/products">products</Link>
           </li>
           <li className={style.item}>
+            <Link to="/products">contact</Link>
+          </li>
+          <li className={style.item}>
             <a href="product">about</a>
           </li>
         </ul>

@@ -1,13 +1,13 @@
 .container {
   width: min(1200px, 90vw);
-  padding: var(--padding-all);
+  padding: calc(var(--padding-all) + 20px);
   margin: auto;
 
   & .wraper {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 40px;
+    column-gap: 50px;
 
     & .item {
       cursor: pointer;
@@ -37,14 +37,14 @@
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
   .container {
     width: min(1200px, 90vw);
-    padding: var(--padding-all);
+    padding: calc(var(--padding-all) + 20px);
     margin: auto;
 
     & .wraper {
       display: flex;
       justify-content: center;
       align-items: center;
-      column-gap: 40px;
+      column-gap: 50px;
 
       & .item {
         cursor: pointer;
@@ -74,14 +74,14 @@
 @media only screen and (min-width: 640px) and (max-width: 768px) {
   .container {
     width: min(1200px, 90vw);
-    padding: var(--padding-all);
+    padding: calc(var(--padding-all) + 20px);
     margin: auto;
 
     & .wraper {
       display: flex;
       justify-content: center;
       align-items: center;
-      column-gap: 40px;
+      column-gap: 50px;
 
       & .item {
         cursor: pointer;
@@ -118,7 +118,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      column-gap: 20px;
+      column-gap: 10px;
 
       & .item {
         cursor: pointer;
