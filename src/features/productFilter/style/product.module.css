@@ -1,16 +1,19 @@
 .wraper_product {
+  width: 100%;
   /* background-color: red; */
   display: flex;
+  padding: var(--padding-all);
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   & .wraper {
+    width: 1000px;
+    /* background-color: blue; */
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    padding: var(--padding-all);
 
     & .item {
       width: 220px;
@@ -41,7 +44,7 @@
     }
 
     & .item:hover figure img {
-      transition-duration: 300ms;
+      transition-duration: 100ms;
       transform: scale(1.05);
     }
   }

@@ -1,5 +1,5 @@
 const Filter = (props) => {
-  const { onHandleFilterProducts, style_filter, icons } = props;
+  const { handleFilterProducts, style_filter, icons } = props;
 
   const list = icons.map((data, index) => {
     return (
@@ -9,7 +9,7 @@ const Filter = (props) => {
           name={data.name}
           id={data.name}
           value={data.kategory}
-          onClick={onHandleFilterProducts}
+          onClick={handleFilterProducts}
         />
         <span className={style_filter.customBox}></span>
         {data.name}

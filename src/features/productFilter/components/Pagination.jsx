@@ -1,10 +1,11 @@
 const Pagination = (props) => {
-  const { goToPage, currentPage, endPage, startPage, totalPages } = props;
+  const { totalPages, handlePageChange, currentPage, startPage, endPage } =
+    props;
 
   return (
     <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
       <button
-        onClick={() => goToPage(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         prev
@@ -12,24 +13,27 @@ const Pagination = (props) => {
 
       {/* tombol angka page */}
       {Array.from({ length: endPage - startPage + 1 }, (_, index) => {
-        const page = startPage + index;
-
+        const number = startPage + index;
         return (
           <button
-            key={index + 1}
-            onClick={() => goToPage(page)}
+            key={number}
             style={{
-              fontWeight: currentPage === page ? "bold" : "normal",
+              marginRight: "5px",
+              fontWeight: currentPage === number ? "bold" : "normal",
+            }}
+            onClick={() => {
+              handlePageChange(number);
             }}
           >
-            {page}
+            {number}
           </button>
         );
       })}
 
+      {/* <button onClick={() => handlePageChange(totalPages)}>{totalPages}</button> */}
       <button
-        onClick={() => goToPage(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage == totalPages}
       >
         next
       </button>
