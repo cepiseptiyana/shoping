@@ -4,8 +4,9 @@ import { fetchCombinedData } from "@/middleware/combineData/combineDataThunk.js"
 import {
   setPage,
   setSortOption,
-  setFilter,
+  setFilterCheckbox,
   setDeleteFilter,
+  resetData,
 } from "@/middleware/combineData/combineDataSlice.js";
 
 // features components
@@ -20,6 +21,7 @@ import Filter from "./components/Filter.jsx";
 import Pagination from "./components/Pagination.jsx";
 import ShowFilter from "./components/ShowFilter.jsx";
 import ShowSort from "./components/ShowSort.jsx";
+import Loading from "../../components/loading/Loading.jsx";
 
 // global hooks
 import { useProduct } from "@/hooks/useProduct.js";
@@ -47,8 +49,6 @@ const ProductFilters = () => {
   const [option, setOption] = useState("");
   const totalPages = Math.ceil(total / limit);
 
-  console.log(dataFilter);
-
   // jumlah angka button yang di tampilkan
   const pageGroupSize = 5;
   const groupIndex = Math.floor(currentPage / pageGroupSize);
@@ -60,6 +60,10 @@ const ProductFilters = () => {
   useEffect(() => {
     const skip = (currentPage - 1) * limit;
     dispatch(fetchCombinedData({ limit, skip }));
+
+    return () => {
+      dispatch(resetData()); // ✅ Cleanup: reset saat unmount
+    };
   }, [dispatch, currentPage, limit]);
 
   function handlePageChange(page) {
@@ -79,35 +83,14 @@ const ProductFilters = () => {
     dispatch(setSortOption(e.target.value));
   }
 
-  function handleFilterProducts(e) {
-    console.log(e.target.value);
-    if (e.target.checked) {
-      const data2 = data.filter((data) => {
-        return data.category === e.target.value;
-      });
-
-      dispatch(setFilter(data2));
-    } else {
-      dispatch(setDeleteFilter(e.target.value));
-    }
+  function handleFilterProducts(name, checked) {
+    dispatch(setFilterCheckbox({ name, checked }));
   }
 
   if (loading) {
-    return (
-      <img
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%,-50%)",
-          borderRadius: "50%",
-          width: "250px",
-        }}
-        src={loader}
-        alt="Loading..."
-      />
-    );
+    return <Loading />;
   }
+
   if (error) return <p style={{ paddingTop: "100px" }}>Error: {error}</p>;
 
   return (

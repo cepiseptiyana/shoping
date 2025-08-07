@@ -3,6 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchCombinedData = createAsyncThunk(
   "combinedData/fetchCombineData",
   async ({ limit, skip }) => {
+    // console.log("FETCHING: limit =", limit, "skip =", skip);
+
     const res = await fetch(
       `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
     );
@@ -47,7 +49,7 @@ export const fetchCombinedData = createAsyncThunk(
 export const fetchProductById = createAsyncThunk(
   "product/fetchById",
   async (id) => {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const res = await fetch(`https://dummyjson.com/products/${id}`);
     const data = await res.json();
     return data;
   }

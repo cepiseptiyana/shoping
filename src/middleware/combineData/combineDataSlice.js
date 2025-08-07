@@ -9,11 +9,18 @@ const combinedDataSlice = createSlice({
     currentPage: 1,
     total: 0,
     limit: 20,
-    loading: false,
+    loading: true,
     error: null,
   },
 
   reducers: {
+    resetData(state) {
+      state.data = [];
+      state.loading = false;
+      state.error = null;
+      state.limit = 20;
+    },
+
     setPage(state, action) {
       state.currentPage = action.payload;
     },
@@ -30,10 +37,30 @@ const combinedDataSlice = createSlice({
     },
 
     setFilter(state, action) {
-      const data = action.payload;
-      console.log(data);
-      const combined = [...state.dataFilter, ...data];
-      state.dataFilter = combined;
+      console.log(action.payload);
+
+      const data2 = state.data.filter((data) => {
+        return data.category === action.payload;
+      });
+
+      state.dataFilter = [...state.dataFilter, ...data2];
+    },
+
+    setFilterCheckbox(state, action) {
+      const { name, checked } = action.payload;
+      console.log(name);
+
+      if (checked) {
+        const data2 = state.data.filter((data) => {
+          return data.category === name;
+        });
+
+        state.dataFilter = [...state.dataFilter, ...data2];
+      } else {
+        state.dataFilter = state.dataFilter.filter(
+          (data) => data.category !== name
+        );
+      }
     },
 
     setDeleteFilter(state, action) {
@@ -70,7 +97,13 @@ const combinedDataSlice = createSlice({
   },
 });
 
-export const { setPage, setSortOption, setFilter, setDeleteFilter } =
-  combinedDataSlice.actions;
+export const {
+  setPage,
+  setSortOption,
+  setFilter,
+  setDeleteFilter,
+  resetData,
+  setFilterCheckbox,
+} = combinedDataSlice.actions;
 
 export default combinedDataSlice.reducer;

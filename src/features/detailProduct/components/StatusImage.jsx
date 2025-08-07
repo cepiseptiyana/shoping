@@ -1,6 +1,8 @@
+// style
+import style from "../style/image.module.css";
+
 const StatusImage = (props) => {
-  const { data, style } = props;
-  console.log(data);
+  const { data } = props;
 
   return (
     <div className={style.wraperImage}>
@@ -11,7 +13,7 @@ const StatusImage = (props) => {
         </p>
       </header>
 
-      <img src={data.image} alt="" />
+      <img src={data.thumbnail} alt="" />
     </div>
   );
 };

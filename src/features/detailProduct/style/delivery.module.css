@@ -1,0 +1,35 @@
+.delivery {
+  background-color: green;
+  padding: var(--padding-all);
+  font-size: 14px;
+
+  & h1 {
+    font-size: 1rem;
+  }
+
+  & p {
+    padding: 5px;
+  }
+
+  & .table {
+    background-color: yellow;
+    width: 100%;
+    margin: auto;
+    color: rgb(54, 54, 54);
+    border-collapse: collapse;
+
+    & th {
+      padding: 10px;
+      text-align: start;
+      color: rgb(119, 118, 118);
+    }
+
+    & tr {
+      border-bottom: 2px solid black;
+    }
+
+    & td {
+      padding: 10px;
+    }
+  }
+}

@@ -9,7 +9,7 @@ const productDetailSlice = createSlice({
     currentPage: 1,
     total: 0,
     limit: 20,
-    loadingDetail: false,
+    loadingDetail: true,
     errorDetail: null,
   },
 

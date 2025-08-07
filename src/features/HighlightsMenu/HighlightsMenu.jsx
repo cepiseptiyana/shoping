@@ -4,7 +4,6 @@ import { useEffect } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "@/middleware/combineData/combineDataSlice.js";
-import { fetchCombinedData } from "@/middleware/combineData/combineDataThunk.js";
 
 // components
 import List from "./component/List";
@@ -21,21 +20,9 @@ import style from "./style/HighlightsMenu.module.css";
 const HighlightsMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data, currentPage, limit } = useSelector(
-    (state) => state.combinedData
-  );
-
-  useEffect(() => {
-    const skip = (currentPage - 1) * limit;
-    dispatch(fetchCombinedData({ limit: 100, skip: 0 }));
-  }, [dispatch, currentPage, limit]);
 
   function handleNavigasi(name) {
-    const data2 = data.filter((data) => {
-      return data.category === name;
-    });
-
-    dispatch(setFilter(data2));
+    dispatch(setFilter(name));
     navigate("/products");
   }
 

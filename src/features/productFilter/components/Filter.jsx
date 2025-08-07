@@ -9,7 +9,9 @@ const Filter = (props) => {
           name={data.name}
           id={data.name}
           value={data.kategory}
-          onClick={handleFilterProducts}
+          onClick={(e) =>
+            handleFilterProducts(e.target.value, e.target.checked)
+          }
         />
         <span className={style_filter.customBox}></span>
         {data.name}

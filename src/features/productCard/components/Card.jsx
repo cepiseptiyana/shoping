@@ -1,7 +1,8 @@
 const Card = (props) => {
   const { products, style, handleNavigasi } = props;
+  console.log(products);
 
-  const list = products.value.map((data) => {
+  const list = products.map((data) => {
     return (
       <li key={data.id} className={style.item}>
         <article className={style.article}>
@@ -10,10 +11,11 @@ const Card = (props) => {
           </header>
 
           <figure>
-            <img src={data.image} alt="" />
+            <img src={data.thumbnail} alt="" />
           </figure>
 
           <p>{data.title}</p>
+          <p className={style.price}>${data.price}</p>
 
           <button onClick={() => handleNavigasi(data)}>details</button>
         </article>

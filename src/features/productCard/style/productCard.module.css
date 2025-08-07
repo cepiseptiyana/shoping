@@ -18,13 +18,13 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: var(--gap-all);
+    gap: calc(var(--gap-all) + 20px);
     padding: var(--padding-all);
 
     & .item {
       background-color: white;
       position: relative;
-      width: 350px;
+      width: 300px;
       border: 1px solid gray;
       display: flex;
       flex-direction: column;
@@ -61,8 +61,10 @@
 
         & p {
           font-size: calc(var(--paragraph-size) - 2px);
-          padding: var(--padding-all);
-          text-align: start;
+        }
+
+        & .price {
+          padding-top: 10px;
         }
 
         & button {
@@ -106,7 +108,7 @@
 
     & .wrapper {
       & .item {
-        width: 290px;
+        width: 300px;
 
         & .article {
           text-align: center;
@@ -157,7 +159,7 @@
 
     & .wrapper {
       & .item {
-        width: 220px;
+        width: 250px;
 
         & .article {
           text-align: center;
@@ -208,7 +210,7 @@
 
     & .wrapper {
       & .item {
-        width: 200px;
+        width: 150px;
 
         & .article {
           text-align: center;
