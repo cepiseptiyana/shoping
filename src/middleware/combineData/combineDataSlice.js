@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCombinedData } from "./combineDataThunk";
+import { fetchCombinedData, fetchProductById } from "./combineDataThunk";
 
 const combinedDataSlice = createSlice({
   name: "combinedData",

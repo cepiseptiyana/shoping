@@ -1,6 +1,5 @@
 const List = (props) => {
   const { data, style_product } = props;
-  console.log(data);
 
   const dataSr = data.map((data, index) => {
     return (

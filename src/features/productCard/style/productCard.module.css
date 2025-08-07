@@ -10,18 +10,19 @@
     font-family: sans-serif;
     text-transform: uppercase;
     font-size: calc(var(--heading-size) - 10px);
+    padding-left: 40px;
   }
 
   & .wrapper {
     background-color: white;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: var(--gap-all);
     padding: var(--padding-all);
 
     & .item {
       background-color: white;
-      flex-shrink: 0;
       position: relative;
       width: 350px;
       border: 1px solid gray;
@@ -105,7 +106,7 @@
 
     & .wrapper {
       & .item {
-        width: 320px;
+        width: 290px;
 
         & .article {
           text-align: center;
@@ -156,7 +157,7 @@
 
     & .wrapper {
       & .item {
-        width: 320px;
+        width: 220px;
 
         & .article {
           text-align: center;
@@ -207,7 +208,7 @@
 
     & .wrapper {
       & .item {
-        width: 310px;
+        width: 200px;
 
         & .article {
           text-align: center;

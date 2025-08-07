@@ -1,5 +1,5 @@
 const Card = (props) => {
-  const { products, style } = props;
+  const { products, style, handleNavigasi } = props;
 
   const list = products.value.map((data) => {
     return (
@@ -15,7 +15,7 @@ const Card = (props) => {
 
           <p>{data.title}</p>
 
-          <button>details</button>
+          <button onClick={() => handleNavigasi(data)}>details</button>
         </article>
       </li>
     );

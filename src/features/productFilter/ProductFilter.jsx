@@ -47,6 +47,8 @@ const ProductFilters = () => {
   const [option, setOption] = useState("");
   const totalPages = Math.ceil(total / limit);
 
+  console.log(dataFilter);
+
   // jumlah angka button yang di tampilkan
   const pageGroupSize = 5;
   const groupIndex = Math.floor(currentPage / pageGroupSize);
@@ -78,6 +80,7 @@ const ProductFilters = () => {
   }
 
   function handleFilterProducts(e) {
+    console.log(e.target.value);
     if (e.target.checked) {
       const data2 = data.filter((data) => {
         return data.category === e.target.value;
