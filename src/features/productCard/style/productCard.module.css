@@ -49,8 +49,9 @@
         }
 
         & figure {
+          padding: var(--padding-all);
+
           & img {
-            padding: 10px;
             width: 105px;
             height: 100px;
             display: block;
