@@ -6,10 +6,9 @@ const ShowFilter = (props) => {
       <span
         className={style_header.span}
         dangerouslySetInnerHTML={{
-          __html:
-            showFilter == true
-              ? feather.icons["list"].toSvg()
-              : feather.icons["x"].toSvg(),
+          __html: showFilter
+            ? feather.icons["x"].toSvg()
+            : feather.icons["list"].toSvg(),
         }}
       ></span>
       <h1>show filters</h1>

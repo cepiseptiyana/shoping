@@ -1,7 +1,7 @@
 import style from "../style/delivery.module.css";
 
 const Delivery = (props) => {
-  const { data } = props;
+  const { data, handleChangeDelivery } = props;
 
   return (
     <div className={style.delivery}>
@@ -16,19 +16,38 @@ const Delivery = (props) => {
             <th>type</th>
             <th>how long</th>
             <th>how much</th>
+            <th>choice</th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>standard delivery</td>
-            <td>1 - 4 days</td>
+            <td>1 - 7 days</td>
             <td>${data.price}</td>
+            <td>
+              <input
+                type="radio"
+                id="standard"
+                name="fav_language"
+                value={data.price}
+                onChange={(e) => handleChangeDelivery(e.target.value)}
+              />
+            </td>
           </tr>
           <tr>
             <td>express delivery</td>
             <td>1 - 4 days</td>
-            <td>${data.price * 2}</td>
+            <td>${data.price + 200}</td>
+            <td>
+              <input
+                type="radio"
+                id="express"
+                name="fav_language"
+                value={data.price + 200}
+                onChange={(e) => handleChangeDelivery(e.target.value)}
+              />
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1,8 +1,8 @@
 .detailCart {
+  position: relative;
   flex-grow: 1;
   font-family: sans-serif;
   padding: var(--padding-all);
-  background-color: pink;
   text-transform: capitalize;
   margin: auto;
 
@@ -25,7 +25,6 @@
   .detailCart {
     font-family: sans-serif;
     padding: var(--padding-all);
-    background-color: pink;
     text-transform: capitalize;
 
     & .price {
@@ -47,10 +46,9 @@
 @media only screen and (min-width: 640px) and (max-width: 768px) {
   .detailCart {
     font-family: sans-serif;
-    flex: 1;
     padding: var(--padding-all);
-    background-color: pink;
     text-transform: capitalize;
+    padding-bottom: 150px;
 
     & .price {
       display: flex;
@@ -73,8 +71,8 @@
   .detailCart {
     font-family: sans-serif;
     padding: var(--padding-all);
-    background-color: pink;
     text-transform: capitalize;
+    padding-bottom: 200px;
 
     & .price {
       display: flex;

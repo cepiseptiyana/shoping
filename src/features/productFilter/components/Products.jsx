@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import List from "./List";
 
 const Products = (props) => {
-  const { data, dataFilter, style_product } = props;
+  const { data, dataFilter, style_product, handleToDetail } = props;
 
   return (
     <>
@@ -12,6 +12,7 @@ const Products = (props) => {
         <List
           data={dataFilter.length !== 0 ? dataFilter : data}
           style_product={style_product}
+          handleToDetail={handleToDetail}
         />
       </ul>
     </>

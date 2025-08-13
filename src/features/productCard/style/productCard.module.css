@@ -19,7 +19,6 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: calc(var(--gap-all) + 20px);
-    padding: var(--padding-all);
 
     & .item {
       background-color: white;

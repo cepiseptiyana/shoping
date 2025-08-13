@@ -1,5 +1,6 @@
 .title {
   position: relative;
+  z-index: 2;
   text-transform: capitalize;
   font-family: sans-serif;
   color: var(--gray-color);
@@ -14,6 +15,7 @@
     display: flex;
     align-items: center;
     column-gap: 5px;
+    font-size: 13px;
 
     & span {
       display: flex;
@@ -30,8 +32,75 @@
       width: 200px;
       background-color: gray;
       text-transform: capitalize;
-      font-size: var(--paragraph-size);
       color: white;
+
+      & option {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+  .title {
+    position: relative;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    color: var(--gray-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-all);
+
+    & .filter,
+    & .sort {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      font-size: 13px;
+    }
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 768px) {
+  .title {
+    position: relative;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    color: var(--gray-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-all);
+
+    & .filter,
+    & .sort {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      font-size: 13px;
+    }
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 640px) {
+  .title {
+    position: relative;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    color: var(--gray-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-all);
+
+    & .filter,
+    & .sort {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      font-size: 12px;
     }
   }
 }

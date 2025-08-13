@@ -1,8 +1,8 @@
 .container {
-  width: min(1200px, 90vw);
+  width: min(1200px, 95vw);
   margin: auto;
-  padding-top: 88px;
-  padding-bottom: 20px;
+  height: 100vh;
+  padding-top: 90px;
 
   & .header {
     font-family: sans-serif;
@@ -12,17 +12,12 @@
 
   & .dataPayments {
     display: flex;
-    background-color: blue;
+    padding-top: 10px;
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1280px) {
+@media only screen and (min-width: 768px) and (max-width: 930px) {
   .container {
-    width: min(1200px, 90vw);
-    margin: auto;
-    padding-top: 88px;
-    padding-bottom: 20px;
-
     & .header {
       font-family: sans-serif;
       font-size: calc(var(--heading-size) - 6px);
@@ -32,18 +27,12 @@
     & .dataPayments {
       display: flex;
       flex-wrap: wrap;
-      /* background-color: blue; */
     }
   }
 }
 
 @media only screen and (min-width: 640px) and (max-width: 768px) {
   .container {
-    width: min(1200px, 90vw);
-    margin: auto;
-    padding-top: 88px;
-    padding-bottom: 20px;
-
     & .header {
       font-family: sans-serif;
       font-size: calc(var(--heading-size) - 10px);
@@ -53,18 +42,12 @@
     & .dataPayments {
       display: flex;
       flex-direction: column;
-      /* background-color: blue; */
     }
   }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 640px) {
   .container {
-    width: min(1200px, 90vw);
-    margin: auto;
-    padding-top: 88px;
-    padding-bottom: 20px;
-
     & .header {
       font-family: sans-serif;
       font-size: calc(var(--heading-size) - 10px);
@@ -74,8 +57,6 @@
     & .dataPayments {
       display: flex;
       flex-wrap: wrap;
-      /* flex-direction: column; */
-      /* background-color: blue; */
     }
   }
 }

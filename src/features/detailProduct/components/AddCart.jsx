@@ -38,16 +38,18 @@ const AddCart = (props) => {
             ></input>
 
             <div className={style.count}>
-              <p onClick={handleAddQuantity}>+</p>
-              <p onClick={handleReduceQuantity}>-</p>
+              <p onClick={() => handleAddQuantity(quantity, data.id, size)}>
+                +
+              </p>
+              <p onClick={() => handleReduceQuantity(quantity, data.id, size)}>
+                -
+              </p>
             </div>
           </div>
 
           <button className={style.add} type="submit">
             add to cart
           </button>
-
-          <button className={style.fav}>favourite</button>
         </div>
       </form>
     </div>

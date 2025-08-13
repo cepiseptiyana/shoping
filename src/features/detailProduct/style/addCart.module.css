@@ -1,10 +1,11 @@
 .form {
-  background-color: red;
+  background-color: rgb(226, 226, 226, 0.5);
   text-transform: capitalize;
   font-size: 14px;
+  padding: 12px;
 
   & .size {
-    background-color: yellow;
+    /* background-color: yellow; */
 
     & label {
       display: block;
@@ -19,6 +20,7 @@
   }
 
   & .addCart {
+    padding-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,6 +28,7 @@
     & .quantity {
       display: flex;
       align-items: center;
+      gap: 5px;
 
       & input {
         font-size: 13px;
@@ -39,21 +42,23 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 2px;
+        gap: 5px;
 
         & p {
+          color: white;
           display: flex;
           justify-content: center;
           align-items: center;
           width: 25px;
           height: 25px;
           cursor: pointer;
-          background-color: red;
+          background-color: var(--orange-color);
         }
       }
     }
 
     & .add {
+      cursor: pointer;
       font-size: 13px;
       text-transform: capitalize;
       width: 200px;
@@ -62,9 +67,14 @@
       color: white;
       border: none;
       border-radius: 8px;
+
+      &:hover {
+        background-color: rgb(4, 59, 29);
+      }
     }
 
     & .fav {
+      cursor: pointer;
       font-size: 13px;
       text-transform: capitalize;
       width: 150px;
@@ -72,6 +82,10 @@
       color: var(--green-color);
       border: 1px solid var(--green-color);
       border-radius: 8px;
+
+      &:hover {
+        background-color: rgb(165, 165, 165);
+      }
     }
   }
 }
@@ -82,7 +96,7 @@
     font-size: 14px;
 
     & .size {
-      background-color: yellow;
+      /* background-color: yellow; */
 
       & label {
         display: block;
@@ -97,6 +111,7 @@
     }
 
     & .addCart {
+      padding-top: ;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -118,9 +133,14 @@
           text-align: center;
 
           & p {
-            cursor: pointer;
-            background-color: red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 20px;
+            height: 20px;
+            cursor: pointer;
+            background-color: var(--orange-color);
           }
         }
       }
@@ -128,7 +148,7 @@
       & .add {
         text-transform: capitalize;
         width: 200px;
-        height: 30px;
+        height: 35px;
         background-color: var(--green-color);
         color: white;
         border: none;
@@ -151,9 +171,20 @@
   .form {
     text-transform: capitalize;
     font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    & form {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      column-gap: 10px;
+    }
 
     & .size {
-      background-color: yellow;
+      /* background-color: yellow; */
 
       & label {
         display: block;
@@ -168,11 +199,15 @@
     }
 
     & .addCart {
+      padding-top: 0;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 10px;
       align-items: center;
 
       & .quantity {
+        order: 2;
         display: flex;
         align-items: center;
 
@@ -189,17 +224,23 @@
           text-align: center;
 
           & p {
-            cursor: pointer;
-            background-color: red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 20px;
+            height: 20px;
+            cursor: pointer;
+            background-color: var(--orange-color);
           }
         }
       }
 
       & .add {
+        order: 3;
         text-transform: capitalize;
-        width: 200px;
-        height: 30px;
+        width: 250px;
+        height: 40px;
         background-color: var(--green-color);
         color: white;
         border: none;
@@ -207,6 +248,7 @@
       }
 
       & .fav {
+        order: 1;
         text-transform: capitalize;
         width: 150px;
         height: 30px;
@@ -222,9 +264,20 @@
   .form {
     text-transform: capitalize;
     font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    & form {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
     & .size {
-      background-color: yellow;
+      /* background-color: yellow; */
 
       & label {
         display: block;
@@ -232,20 +285,23 @@
 
       & select {
         font-size: 11px;
-        width: 200px;
+        width: 150px;
         height: 30px;
         border: 2px solid var(--bold-color);
       }
     }
 
     & .addCart {
+      padding-top: 0;
       display: flex;
-      flex-wrap: wrap;
-      /* flex-direction: column; */
-      justify-content: space-between;
+      /* flex-wrap: wrap; */
+      flex-direction: column;
+      justify-content: start;
+      row-gap: 10px;
       align-items: center;
 
       & .quantity {
+        order: 2;
         display: flex;
         align-items: center;
 
@@ -262,14 +318,20 @@
           text-align: center;
 
           & p {
-            cursor: pointer;
-            background-color: red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 20px;
+            height: 20px;
+            cursor: pointer;
+            background-color: var(--orange-color);
           }
         }
       }
 
       & .add {
+        order: 3;
         text-transform: capitalize;
         width: 200px;
         height: 30px;
@@ -280,6 +342,7 @@
       }
 
       & .fav {
+        order: 1;
         text-transform: capitalize;
         width: 150px;
         height: 30px;
@@ -287,6 +350,24 @@
         border: 1px solid var(--green-color);
         border-radius: 8px;
       }
+    }
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 400px) {
+  .form {
+    text-transform: capitalize;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    & form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
   }
 }

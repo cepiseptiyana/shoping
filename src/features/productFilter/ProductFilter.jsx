@@ -9,6 +9,9 @@ import {
   resetData,
 } from "@/middleware/combineData/combineDataSlice.js";
 
+// react router
+import { useNavigate } from "react-router";
+
 // features components
 import { useEffect, useState } from "react";
 
@@ -41,10 +44,11 @@ import loader from "@/assets/loading.gif";
 
 const ProductFilters = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, dataFilter, loading, error, currentPage, limit, total } =
     useSelector((state) => state.combinedData);
 
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
   const [option, setOption] = useState("");
   const totalPages = Math.ceil(total / limit);
@@ -87,6 +91,10 @@ const ProductFilters = () => {
     dispatch(setFilterCheckbox({ name, checked }));
   }
 
+  function handleToDetail(data) {
+    navigate(`/detail/${data.id}`);
+  }
+
   if (loading) {
     return <Loading />;
   }
@@ -115,19 +123,20 @@ const ProductFilters = () => {
         </div>
 
         <div className={style_categories.categories}>
-          {showFilter && (
-            <Filter
-              style_filter={style_filter}
-              icons={icons}
-              handleFilterProducts={handleFilterProducts}
-            />
-          )}
+          <Filter
+            handleShowFilter={handleShowFilter}
+            showFilter={showFilter}
+            style_filter={style_filter}
+            icons={icons}
+            handleFilterProducts={handleFilterProducts}
+          />
 
           <div className={style_product.wraper_product}>
             <Products
               data={data}
               style_product={style_product}
               dataFilter={dataFilter}
+              handleToDetail={handleToDetail}
             />
 
             {/* navigasi */}

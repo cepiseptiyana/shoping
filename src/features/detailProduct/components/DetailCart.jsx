@@ -10,15 +10,15 @@ import style from "../style/detailCart.module.css";
 const DetailCart = (props) => {
   const {
     data,
-    handleChangeSize,
+    handleChangeDelivery,
     size,
     quantity,
     handleChangeQuantity,
     handleAddToCart,
     handleAddQuantity,
     handleReduceQuantity,
+    handleChangeSize,
   } = props;
-  console.log(data);
 
   return (
     <div className={style.detailCart}>
@@ -34,15 +34,15 @@ const DetailCart = (props) => {
       <AddCart
         handleChangeSize={handleChangeSize}
         size={size}
-        data={data}
         quantity={quantity}
+        data={data}
         handleChangeQuantity={handleChangeQuantity}
         handleAddToCart={handleAddToCart}
         handleAddQuantity={handleAddQuantity}
         handleReduceQuantity={handleReduceQuantity}
       />
 
-      <Delivery data={data} />
+      <Delivery data={data} handleChangeDelivery={handleChangeDelivery} />
 
       <Return data={data} />
 
