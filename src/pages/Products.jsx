@@ -1,5 +1,5 @@
 // features
-import ProductFilter from "@/features/ProductFilter/ProductFilter.jsx";
+import ProductFilter from "@/features/productFilter/ProductFilter.jsx";
 
 const Products = () => {
   return (
