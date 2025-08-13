@@ -1,34 +1,31 @@
 const Card = (props) => {
-  const { products, style } = props;
-  const firstTen = products.value.slice(0, 10);
-  const secondTen = products.value.slice(10, 20);
+  const { products, style, handleNavigasi } = props;
+  // console.log(products);
 
-  const list = (datalist) => {
-    return datalist.map((data) => {
-      return (
-        <li key={data.id} className={style.item}>
-          <article className={style.article}>
-            <header>
-              <h1>{data.title}</h1>
-            </header>
+  const list = products.map((data) => {
+    return (
+      <li key={data.id} className={style.item}>
+        <article className={style.article}>
+          <figure>
+            <img src={data.thumbnail} alt={data.title} />
+          </figure>
 
-            <figure>
-              <img src={data.image} alt="" />
-            </figure>
+          <header>
+            <h1>{data.title}</h1>
+          </header>
 
-            <p>{data.title}</p>
+          <p>{data.brand}</p>
+          <p className={style.price}>${data.price}</p>
 
-            <button>details</button>
-          </article>
-        </li>
-      );
-    });
-  };
+          <button onClick={() => handleNavigasi(data)}>details</button>
+        </article>
+      </li>
+    );
+  });
 
   return (
     <>
-      <ul className={style.wrapper}>{list(firstTen)}</ul>
-      <ul className={style.wrapper}>{list(secondTen)}</ul>
+      <ul className={style.wrapper}>{list}</ul>
     </>
   );
 };

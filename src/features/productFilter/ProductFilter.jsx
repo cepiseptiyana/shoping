@@ -1,6 +1,16 @@
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCombinedData } from "@/middleware/combineData/combineDataThunk.js";
+import {
+  setPage,
+  setSortOption,
+  setFilterCheckbox,
+  setDeleteFilter,
+  resetData,
+} from "@/middleware/combineData/combineDataSlice.js";
+
+// react router
+import { useNavigate } from "react-router";
 
 // features components
 import { useEffect, useState } from "react";
@@ -10,7 +20,11 @@ import feather from "feather-icons";
 
 // components
 import Products from "./components/Products.jsx";
-import Filter from "./components/Filter";
+import Filter from "./components/Filter.jsx";
+import Pagination from "./components/Pagination.jsx";
+import ShowFilter from "./components/ShowFilter.jsx";
+import ShowSort from "./components/ShowSort.jsx";
+import Loading from "../../components/loading/Loading.jsx";
 
 // global hooks
 import { useProduct } from "@/hooks/useProduct.js";
@@ -25,141 +39,117 @@ import style_categories from "./style/categories.module.css";
 import style_filter from "./style/filter.module.css";
 import style_product from "./style/product.module.css";
 
+// assets
+import loader from "@/assets/loading.gif";
+
 const ProductFilters = () => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.combinedData);
-  const [dataFilter, setDataFilter] = useState([]);
-  const [showFilter, setShowFilter] = useState(true);
+  const navigate = useNavigate();
+  const { data, dataFilter, loading, error, currentPage, limit, total } =
+    useSelector((state) => state.combinedData);
+
+  const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
+  const [option, setOption] = useState("");
+  const totalPages = Math.ceil(total / limit);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
-  // current Product Index
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-
-  // current Product
-  const curentProduct = data.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-
-  // current Product maxButton
-  const maxPageButtons = 5;
-  let startPage = Math.max(currentPage - Math.floor(maxPageButtons / 2), 1);
-  let endPage = startPage + maxPageButtons - 1;
-
-  const goToPage = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
+  // jumlah angka button yang di tampilkan
+  const pageGroupSize = 5;
+  const groupIndex = Math.floor(currentPage / pageGroupSize);
+  const startPage = groupIndex * pageGroupSize + 1;
+  const endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
 
   // controlled component
-  const [option, setOption] = useState("");
 
   useEffect(() => {
-    dispatch(fetchCombinedData());
-  }, [dispatch]);
+    const skip = (currentPage - 1) * limit;
+    dispatch(fetchCombinedData({ limit, skip }));
 
-  function onHandleFilterProducts(e) {
-    if (e.target.checked == true) {
-      const filter = data.filter((data) => data.category === e.target.value);
-      setDataFilter([...dataFilter, ...filter]);
-    } else if (e.target.checked == false) {
-      // delete
-      const deleted = dataFilter.filter(
-        (data) => data.category !== e.target.value
-      );
-      setDataFilter(deleted);
-      setFilterPage((prev) => prev - 1);
-    }
+    return () => {
+      dispatch(resetData()); // ✅ Cleanup: reset saat unmount
+    };
+  }, [dispatch, currentPage, limit]);
+
+  function handlePageChange(page) {
+    if (page >= 1 && page <= totalPages) dispatch(setPage(page));
   }
 
-  // handleSort
-  function handleSort(value) {
-    setOption(value);
-
-    const sorted = [...data];
-
-    if (value === "populer") {
-      sorted.sort((a, b) => b.rating - a.rating);
-    } else if (value === "rekomendasi") {
-      sorted.sort(() => Math.random() - 0.5); // acak urutan
-    }
-
-    setDataFilter(sorted);
+  function handleShowFilter() {
+    setShowFilter(!showFilter);
   }
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  function handleShowSort() {
+    setShowSort(!showSort);
+  }
+
+  function handleChangeSort(e) {
+    setOption(e.target.value);
+    dispatch(setSortOption(e.target.value));
+  }
+
+  function handleFilterProducts(name, checked) {
+    dispatch(setFilterCheckbox({ name, checked }));
+  }
+
+  function handleToDetail(data) {
+    navigate(`/detail/${data.id}`);
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) return <p style={{ paddingTop: "100px" }}>Error: {error}</p>;
 
   return (
     <>
       <section className={style_container.container}>
         <div className={style_header.title}>
-          <div
-            className={style_header.filter}
-            onClick={() => setShowFilter(!showFilter)}
-          >
-            <span
-              className={style_header.span}
-              dangerouslySetInnerHTML={{
-                __html:
-                  showFilter == true
-                    ? feather.icons["list"].toSvg()
-                    : feather.icons["x"].toSvg(),
-              }}
-            ></span>
-            <h1>show filters</h1>
-          </div>
+          <ShowFilter
+            handleShowFilter={handleShowFilter}
+            showFilter={showFilter}
+            style_header={style_header}
+            feather={feather}
+          />
 
-          <div
-            className={style_header.sort}
-            onClick={() => setShowSort(!showSort)}
-          >
-            <h1>Sort by Relevant </h1>
-            <span
-              className={style_header.span}
-              dangerouslySetInnerHTML={{
-                __html: feather.icons["chevron-down"].toSvg(),
-              }}
-            ></span>
-          </div>
-
-          {showSort == true ? (
-            <div className={style_header.option}>
-              <select
-                name=""
-                id=""
-                value={option}
-                onChange={(e) => handleSort(e.target.value)}
-              >
-                <option value="populer">populer</option>
-                <option value="rekomendasi">rekomendasi</option>
-              </select>
-            </div>
-          ) : null}
+          <ShowSort
+            handleShowSort={handleShowSort}
+            style_header={style_header}
+            feather={feather}
+            showSort={showSort}
+            option={option}
+            handleChangeSort={handleChangeSort}
+          />
         </div>
 
         <div className={style_categories.categories}>
-          {showFilter == true ? (
-            <Filter
-              onHandleFilterProducts={onHandleFilterProducts}
-              style_filter={style_filter}
-              icons={icons}
-            />
-          ) : null}
-
-          <Products
-            totalPages={totalPages}
-            goToPage={goToPage}
-            currentPage={currentPage}
-            startPage={startPage}
-            endPage={endPage}
-            curentProduct={curentProduct}
-            products={dataFilter}
-            style_product={style_product}
+          <Filter
+            handleShowFilter={handleShowFilter}
+            showFilter={showFilter}
+            style_filter={style_filter}
+            icons={icons}
+            handleFilterProducts={handleFilterProducts}
           />
+
+          <div className={style_product.wraper_product}>
+            <Products
+              data={data}
+              style_product={style_product}
+              dataFilter={dataFilter}
+              handleToDetail={handleToDetail}
+            />
+
+            {/* navigasi */}
+            {dataFilter.length === 0 && (
+              <Pagination
+                startPage={startPage}
+                endPage={endPage}
+                totalPages={totalPages}
+                handlePageChange={handlePageChange}
+                currentPage={currentPage}
+              />
+            )}
+          </div>
         </div>
       </section>
     </>

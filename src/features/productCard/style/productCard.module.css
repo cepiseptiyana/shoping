@@ -10,33 +10,20 @@
     font-family: sans-serif;
     text-transform: uppercase;
     font-size: calc(var(--heading-size) - 10px);
+    padding-left: 40px;
   }
 
   & .wrapper {
     background-color: white;
     display: flex;
-    gap: var(--gap-all);
-    overflow-x: scroll;
-    padding: var(--padding-all);
-
-    &::-webkit-scrollbar {
-      height: 2px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgb(122, 122, 122);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: blue;
-      cursor: pointer;
-    }
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: calc(var(--gap-all) + 20px);
 
     & .item {
       background-color: white;
-      flex-shrink: 0;
       position: relative;
-      width: 350px;
+      width: 300px;
       border: 1px solid gray;
       display: flex;
       flex-direction: column;
@@ -73,8 +60,10 @@
 
         & p {
           font-size: calc(var(--paragraph-size) - 2px);
-          padding: var(--padding-all);
-          text-align: start;
+        }
+
+        & .price {
+          padding-top: 10px;
         }
 
         & button {
@@ -118,7 +107,7 @@
 
     & .wrapper {
       & .item {
-        width: 320px;
+        width: 300px;
 
         & .article {
           text-align: center;
@@ -169,7 +158,7 @@
 
     & .wrapper {
       & .item {
-        width: 320px;
+        width: 250px;
 
         & .article {
           text-align: center;
@@ -220,7 +209,7 @@
 
     & .wrapper {
       & .item {
-        width: 310px;
+        width: 150px;
 
         & .article {
           text-align: center;

@@ -1,42 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
-import CurrentProduct from "./CurrentProduct";
-import Pagination from "./Pagination";
+import List from "./List";
 
 const Products = (props) => {
-  const {
-    totalPages,
-    goToPage,
-    endPage,
-    startPage,
-    products,
-    style_product,
-    currentPage,
-    curentProduct,
-  } = props;
-  // console.log(dataFilter);
-  // console.log(products);
+  const { data, dataFilter, style_product, handleToDetail } = props;
 
   return (
     <>
-      <div className={style_product.wraper_product}>
-        <ul className={style_product.wraper}>
-          <CurrentProduct
-            curentProduct={products.length == 0 ? curentProduct : products}
-            style_product={style_product}
-          />
-        </ul>
-
-        {/* navigasi */}
-        <Pagination
-          goToPage={goToPage}
-          currentPage={currentPage}
-          startPage={startPage}
-          endPage={endPage}
-          totalPages={totalPages}
+      <ul className={style_product.wraper}>
+        <List
+          data={dataFilter.length !== 0 ? dataFilter : data}
+          style_product={style_product}
+          handleToDetail={handleToDetail}
         />
-      </div>
+      </ul>
     </>
   );
 };

@@ -1,16 +1,16 @@
 .wraper_product {
-  /* background-color: red; */
   display: flex;
+  padding: var(--padding-all);
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   & .wraper {
+    /* background-color: blue; */
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    padding: var(--padding-all);
 
     & .item {
       width: 220px;
@@ -20,13 +20,13 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      cursor: pointer;
+      padding-bottom: 10px;
 
       & figure {
         padding: var(--padding-all);
 
         & img {
-          width: 205px;
+          width: 100%;
         }
       }
 
@@ -38,11 +38,181 @@
         width: 80%; /* tentukan lebar agar efeknya berlaku */
         display: block;
       }
+
+      & .button {
+        cursor: pointer;
+        color: white;
+        font-family: sans-serif;
+        text-transform: capitalize;
+        border: none;
+        background-color: var(--primary-color);
+        font-size: 12px;
+        padding: 3px 10px;
+        transition-duration: 100ms;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
     }
 
     & .item:hover figure img {
-      transition-duration: 300ms;
+      transition-duration: 100ms;
       transform: scale(1.05);
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  .wraper_product {
+    display: flex;
+    padding: var(--padding-all);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .wraper {
+      /* background-color: blue; */
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      & .item {
+        width: 150px;
+        /* background-color: var(--primary-color); */
+        border: 1px solid gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        & figure {
+          padding: var(--padding-all);
+
+          & img {
+            width: 100%;
+          }
+        }
+
+        & .description {
+          padding: var(--padding-all);
+          white-space: nowrap; /* supaya teks tetap satu baris */
+          overflow: hidden; /* sembunyikan teks yang meluber */
+          text-overflow: ellipsis; /* tambahkan titik tiga (...) */
+          width: 80%; /* tentukan lebar agar efeknya berlaku */
+          display: block;
+        }
+      }
+
+      & .item:hover figure img {
+        transition-duration: 100ms;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 768px) {
+  .wraper_product {
+    display: flex;
+    padding: var(--padding-all);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .wraper {
+      /* background-color: blue; */
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      & .item {
+        width: 120px;
+        /* background-color: var(--primary-color); */
+        border: 1px solid gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        & figure {
+          padding: var(--padding-all);
+
+          & img {
+            width: 100%;
+          }
+        }
+
+        & .description {
+          padding: var(--padding-all);
+          white-space: nowrap; /* supaya teks tetap satu baris */
+          overflow: hidden; /* sembunyikan teks yang meluber */
+          text-overflow: ellipsis; /* tambahkan titik tiga (...) */
+          width: 80%; /* tentukan lebar agar efeknya berlaku */
+          display: block;
+        }
+      }
+
+      & .item:hover figure img {
+        transition-duration: 100ms;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 640px) {
+  .wraper_product {
+    display: flex;
+    padding: var(--padding-all);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .wraper {
+      /* background-color: blue; */
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      & .item {
+        /* flex: 1; */
+        width: 100px;
+        /* background-color: var(--primary-color); */
+        border: 1px solid gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        & figure {
+          padding: var(--padding-all);
+
+          & img {
+            width: 100%;
+          }
+        }
+
+        & .description {
+          padding: var(--padding-all);
+          white-space: nowrap; /* supaya teks tetap satu baris */
+          overflow: hidden; /* sembunyikan teks yang meluber */
+          text-overflow: ellipsis; /* tambahkan titik tiga (...) */
+          width: 80%; /* tentukan lebar agar efeknya berlaku */
+          display: block;
+        }
+      }
+
+      & .item:hover figure img {
+        transition-duration: 100ms;
+        transform: scale(1.05);
+      }
     }
   }
 }

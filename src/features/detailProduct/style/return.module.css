@@ -1,0 +1,17 @@
+.return {
+  padding: var(--padding-all);
+  font-size: 13px;
+
+  & h1 {
+    font-size: 1rem;
+  }
+
+  & p {
+    padding: 5px;
+  }
+
+  & ul {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

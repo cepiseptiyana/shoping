@@ -2,6 +2,7 @@
   width: min(1200px, 90vw);
   margin: auto;
   padding-top: 88px;
+  padding-bottom: 20px;
 
   & .sliderWraper {
     display: flex;
@@ -51,12 +52,13 @@
   }
 
   & .sliderNav {
-    padding-top: 5px;
+    padding-top: 35px;
     display: flex;
     justify-content: center;
     column-gap: 10px;
 
     & button {
+      cursor: pointer;
       border: 0;
       background-color: rgb(22, 66, 92);
       width: 15px;
@@ -97,6 +99,20 @@
         }
       }
     }
+
+    & .sliderNav {
+      display: flex;
+      justify-content: center;
+      column-gap: 10px;
+
+      & button {
+        border: 0;
+        background-color: rgb(22, 66, 92);
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      }
+    }
   }
 }
 
@@ -129,6 +145,20 @@
           color: rgb(53, 53, 53);
           padding: 0 10%;
         }
+      }
+    }
+
+    & .sliderNav {
+      display: flex;
+      justify-content: center;
+      column-gap: 10px;
+
+      & button {
+        border: 0;
+        background-color: rgb(22, 66, 92);
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
       }
     }
   }
@@ -165,6 +195,20 @@
           color: rgb(53, 53, 53);
           padding: 0;
         }
+      }
+    }
+
+    & .sliderNav {
+      display: flex;
+      justify-content: center;
+      column-gap: 10px;
+
+      & button {
+        border: 0;
+        background-color: rgb(22, 66, 92);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
       }
     }
   }
