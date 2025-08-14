@@ -1,14 +1,47 @@
-// feature
-import HeroSection from "../features/heroSection/Hero.jsx";
-import Product from "../features/productCard/ProductCard.jsx";
-import HighlightsMenu from "../features/HighlightsMenu/HighlightsMenu.jsx";
+// features
+import HeroSection from "../features/heroSection/components/HeroSection";
+import HighlightsMenu from "../features/HighlightsMenu/HighlightsMenu";
+import ProductCard from "../features/productCard/ProductCard";
+
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCombinedData,
+  fetchDataHighlight,
+} from "@/middleware/combineData/combineDataThunk.js";
+import {
+  setFilter,
+  resetData,
+} from "@/middleware/combineData/combineDataSlice.js";
+
+// react router
+import { useNavigate } from "react-router";
+
+// global utils
+import { icons } from "@/utils/icons";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <>
       <HeroSection />
-      <HighlightsMenu />
-      <Product />
+      <HighlightsMenu
+        dispatch={dispatch}
+        navigate={navigate}
+        fetchDataHighlight={fetchDataHighlight}
+        resetData={resetData}
+        setFilter={setFilter}
+        icons={icons}
+      />
+      <ProductCard
+        fetchCombinedData={fetchCombinedData}
+        navigate={navigate}
+        dispatch={dispatch}
+        useSelector={useSelector}
+        resetData={resetData}
+      />
     </>
   );
 };

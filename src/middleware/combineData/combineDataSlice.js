@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCombinedData, fetchProductById } from "./combineDataThunk";
+import { fetchCombinedData, fetchDataHighlight } from "./combineDataThunk";
 
 const combinedDataSlice = createSlice({
   name: "combinedData",
   initialState: {
     data: [],
     dataFilter: [],
+    dataHighLightFilter: [],
     currentPage: 1,
     total: 0,
     limit: 20,
@@ -16,6 +17,8 @@ const combinedDataSlice = createSlice({
   reducers: {
     resetData(state) {
       state.data = [];
+      state.dataFilter = [];
+      state.dataHighLightFilter = [];
       state.loading = false;
       state.error = null;
       state.limit = 20;
@@ -37,13 +40,15 @@ const combinedDataSlice = createSlice({
     },
 
     setFilter(state, action) {
-      console.log(action.payload);
+      const category = action.payload;
+      console.log(category);
 
-      const data2 = state.data.filter((data) => {
-        return data.category === action.payload;
+      const newDataFilter = state.dataHighLightFilter.filter((data) => {
+        return data.category === category;
       });
 
-      state.dataFilter = [...state.dataFilter, ...data2];
+      // console.log(JSON.parse(JSON.stringify(newDataFilter)));
+      state.dataFilter = [...state.dataFilter, ...newDataFilter];
     },
 
     setFilterCheckbox(state, action) {
@@ -78,6 +83,7 @@ const combinedDataSlice = createSlice({
     },
   },
 
+  // handleThunk response
   extraReducers: (builder) => {
     builder
       .addCase(fetchCombinedData.pending, (state) => {
@@ -91,6 +97,20 @@ const combinedDataSlice = createSlice({
         state.total = action.payload.total;
       })
       .addCase(fetchCombinedData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+      // data highlight
+      .addCase(fetchDataHighlight.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchDataHighlight.fulfilled, (state, action) => {
+        state.loading = false;
+        state.dataHighLightFilter = action.payload.products;
+      })
+      .addCase(fetchDataHighlight.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

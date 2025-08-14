@@ -1,20 +1,6 @@
 // react
 import { useEffect } from "react";
 
-// redux
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCombinedData } from "@/middleware/combineData/combineDataThunk.js";
-import {
-  setPage,
-  setSortOption,
-  setFilter,
-  setDeleteFilter,
-  resetData,
-} from "@/middleware/combineData/combineDataSlice.js";
-
-// react router
-import { useNavigate } from "react-router";
-
 // components
 import Card from "./components/Card";
 import Loading from "../../components/loading/Loading";
@@ -22,17 +8,18 @@ import Loading from "../../components/loading/Loading";
 // style
 import style from "./style/productCard.module.css";
 
-const ProductCard = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+const ProductCard = (props) => {
+  const { fetchCombinedData, dispatch, navigate, useSelector, resetData } =
+    props;
+
   const { data, loading, limit } = useSelector((state) => state.combinedData);
 
   useEffect(() => {
     dispatch(fetchCombinedData({ limit, skip: 0 }));
 
-    return () => {
-      dispatch(resetData()); // ✅ Cleanup: reset saat unmount
-    };
+    // return () => {
+    //   dispatch(resetData()); // ✅ Cleanup: reset saat unmount
+    // };
   }, [dispatch, limit]);
 
   function handleNavigasi(data) {
