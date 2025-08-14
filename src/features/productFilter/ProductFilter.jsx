@@ -1,22 +1,5 @@
-// redux
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCombinedData } from "@/middleware/combineData/combineDataThunk.js";
-import {
-  setPage,
-  setSortOption,
-  setFilterCheckbox,
-  setDeleteFilter,
-  resetData,
-} from "@/middleware/combineData/combineDataSlice.js";
-
-// react router
-import { useNavigate } from "react-router";
-
 // features components
 import { useEffect, useState } from "react";
-
-// feather
-import feather from "feather-icons";
 
 // components
 import Products from "./components/Products.jsx";
@@ -26,12 +9,6 @@ import ShowFilter from "./components/ShowFilter.jsx";
 import ShowSort from "./components/ShowSort.jsx";
 import Loading from "../../components/loading/Loading.jsx";
 
-// global hooks
-import { useProduct } from "@/hooks/useProduct.js";
-
-// global utils
-import { icons } from "@/utils/icons";
-
 // style
 import style_container from "./style/container.module.css";
 import style_header from "./style/header.module.css";
@@ -39,14 +16,24 @@ import style_categories from "./style/categories.module.css";
 import style_filter from "./style/filter.module.css";
 import style_product from "./style/product.module.css";
 
-// assets
-import loader from "@/assets/loading.gif";
+// // assets
+// import loader from "@/assets/loading.gif";
 
-const ProductFilters = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const ProductFilters = (props) => {
+  const {
+    dispatch,
+    navigate,
+    selector,
+    fetchCombinedData,
+    resetData,
+    feather,
+    icons,
+    setSortOption,
+    setFilterCheckbox,
+    setPage,
+  } = props;
   const { data, dataFilter, loading, error, currentPage, limit, total } =
-    useSelector((state) => state.combinedData);
+    selector;
 
   const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
@@ -58,8 +45,6 @@ const ProductFilters = () => {
   const groupIndex = Math.floor(currentPage / pageGroupSize);
   const startPage = groupIndex * pageGroupSize + 1;
   const endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
-  // controlled component
 
   useEffect(() => {
     const skip = (currentPage - 1) * limit;
