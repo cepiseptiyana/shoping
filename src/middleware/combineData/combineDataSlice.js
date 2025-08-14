@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCombinedData, fetchDataHighlight } from "./combineDataThunk";
+import {
+  fetchCombinedData,
+  fetchDataHighlight,
+  fetchLogin,
+  fetchRegister,
+} from "./combineDataThunk";
 
 const combinedDataSlice = createSlice({
   name: "combinedData",
   initialState: {
     data: [],
     dataFilter: [],
+    users: [],
     dataHighLightFilter: [],
     currentPage: 1,
     total: 0,
@@ -99,9 +105,10 @@ const combinedDataSlice = createSlice({
       .addCase(fetchCombinedData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
+      });
 
-      // data highlight
+    // data highlight
+    builder
       .addCase(fetchDataHighlight.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -111,6 +118,38 @@ const combinedDataSlice = createSlice({
         state.dataHighLightFilter = action.payload.products;
       })
       .addCase(fetchDataHighlight.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+
+    // login
+    builder
+      .addCase(fetchLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchLogin.fulfilled, (state, action) => {
+        state.loading = false;
+        // console.log(action.payload);
+        // state.users = action.payload;
+      })
+      .addCase(fetchLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+
+    // register
+    builder
+      .addCase(fetchRegister.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRegister.fulfilled, (state, action) => {
+        state.loading = false;
+        // console.log(action.payload);
+        // state.users = action.payload;
+      })
+      .addCase(fetchRegister.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
