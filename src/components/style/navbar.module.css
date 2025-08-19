@@ -1,12 +1,14 @@
 .nav {
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   position: fixed;
   width: 100vw;
   z-index: 9999;
   background-color: rgb(235, 235, 235);
 
   & .header {
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     align-items: center;
     text-transform: uppercase;
@@ -18,7 +20,7 @@
   }
 
   & .wraper {
-    flex: 1;
+    /* flex: 1; */
     list-style-type: none;
     display: flex;
     justify-content: center;
@@ -44,7 +46,7 @@
   }
 
   & .figure {
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,12 +85,25 @@
 
       &:hover {
         color: rgb(83, 190, 240);
-        /* background-color: red; */
       }
     }
 
     & .close {
       display: none;
+    }
+  }
+
+  & .logout {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    & span {
+      cursor: pointer;
+
+      &:hover {
+        color: rgb(83, 190, 240);
+      }
     }
   }
 }

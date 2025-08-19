@@ -9,6 +9,7 @@ import Products from "./pages/Products.jsx";
 import DetailProduct from "./pages/Detail.jsx";
 
 import Login from "./features/login/Login.jsx";
+import Profile from "./features/profile/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: HomePage },
       { path: "products", Component: Products },
+      { path: "profile", Component: Profile },
       { path: "products/:category", Component: Products },
       { path: "detail/:id", Component: DetailProduct },
     ],
