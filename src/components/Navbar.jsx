@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import feather from "feather-icons";
 
-import { Link } from "react-router";
+// components
+import Cart from "./cart/Cart";
+
+// hooks
+import { useUser } from "./hooks/useUser";
+
+import { href, Link } from "react-router";
 
 // style
 import style from "./style/navbar.module.css";
@@ -16,11 +22,10 @@ import {
   resetTotalCheckouts,
 } from "@/middleware/combineData/cartDataSlice.js";
 
-// components
-import Cart from "./cart/Cart";
-
 const NavbarComponent = () => {
+  const { user, loading, error } = useUser();
   const dispatch = useDispatch();
+  const [image, setImage] = useState(null);
   const [closeFilter, setCloseFilter] = useState(false);
   const { data, empty, totalCheckouts, totalCheckoutsButton, countCart } =
     useSelector((state) => state.cartData);
@@ -29,6 +34,10 @@ const NavbarComponent = () => {
   const [checked, setChecked] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showTotalCheckout, setShowTotalCheckout] = useState(false);
+
+  useEffect(() => {
+    if (user) setImage(user.picture);
+  }, [user]);
 
   function handleAddQuantity(data) {
     const { quantity, id, size, delivery } = data;
@@ -134,7 +143,47 @@ const NavbarComponent = () => {
               dispatch(resetTotalCheckouts());
             }}
           />
+
+          {!user && (
+            <span
+              dangerouslySetInnerHTML={{
+                __html: feather.icons["log-in"].toSvg(),
+              }}
+              onClick={() => {
+                window.location.href =
+                  "https://login-auth0-iota.vercel.app/login";
+                // window.location.href = "http://localhost:3000/login";
+              }}
+            />
+          )}
         </figure>
+
+        <div className={style.logout}>
+          <Link to="/profile">
+            <img
+              src={
+                user
+                  ? image
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              }
+              alt=""
+              width="30px"
+            />
+          </Link>
+
+          {user && (
+            <span
+              dangerouslySetInnerHTML={{
+                __html: feather.icons["log-out"].toSvg(),
+              }}
+              onClick={() => {
+                window.location.href =
+                  "https://login-auth0-iota.vercel.app/logout";
+                // window.location.href = "http://localhost:3000/logout";
+              }}
+            />
+          )}
+        </div>
 
         <Cart
           showTotalCheckout={showTotalCheckout}
