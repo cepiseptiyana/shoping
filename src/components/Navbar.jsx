@@ -36,7 +36,10 @@ const NavbarComponent = () => {
   const [showTotalCheckout, setShowTotalCheckout] = useState(false);
 
   useEffect(() => {
-    if (user) setImage(user.picture);
+    if (user) {
+      console.log(user);
+      setImage(user.picture);
+    }
   }, [user]);
 
   function handleAddQuantity(data) {
