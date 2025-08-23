@@ -61,6 +61,11 @@
         width: 70%;
         list-style-type: none;
 
+        & .username {
+          display: flex;
+          column-gap: 5px;
+        }
+
         & li > input {
           width: 100%;
           padding: 10px;

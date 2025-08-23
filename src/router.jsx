@@ -9,6 +9,7 @@ import Products from "./pages/Products.jsx";
 import DetailProduct from "./pages/Detail.jsx";
 
 import Login from "./features/login/Login.jsx";
+import Register from "./features/register/Register.jsx";
 import Profile from "./features/profile/Profile.jsx";
 
 const router = createBrowserRouter([
@@ -25,9 +26,12 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "login",
+    path: "/",
     Component: AuthLayout,
-    children: [{ index: true, Component: Login }],
+    children: [
+      { path: "login", Component: Login },
+      { path: "register", Component: Register },
+    ],
   },
 ]);
 

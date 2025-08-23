@@ -13,16 +13,16 @@ import github from "@/assets/github.svg";
 import { useNavigate } from "react-router";
 
 // style
-import style from "./style/login.module.css";
+import style from "./style/register.module.css";
 
 // redux
 import { useDispatch } from "react-redux";
 import {
   fetchLogin,
   fetchRegister,
-} from "../../middleware/combineData/combineDataThunk";
+} from "@/middleware/combineData/combineDataThunk";
 
-const Login = () => {
+const Register = () => {
   const [isLogin, setIstLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ const Login = () => {
       <div className={style.wraperLeft}>
         <div className={style.wraperImage}>
           <h1>shooping</h1>
-          <h1>Hi, Welcome Back</h1>
+          <h1>let's create orders</h1>
           <img src={image} alt="" />
         </div>
       </div>
@@ -45,8 +45,8 @@ const Login = () => {
         <form action="">
           <div className={style.header}>
             Don't have an account ?{" "}
-            <Link to="/register" className={style.register}>
-              register
+            <Link to="/login" className={style.register}>
+              login
             </Link>
           </div>
 
@@ -54,6 +54,11 @@ const Login = () => {
           <p>Enter your detail below.</p>
 
           <ul className={style.wraperInput}>
+            <li className={style.username}>
+              <input type="text" placeholder="First name" />
+              <input type="text" placeholder="Last name" />
+            </li>
+
             <li>
               <input type="email" placeholder="Email Address" />
             </li>
@@ -67,11 +72,11 @@ const Login = () => {
             <img src={github} alt="" />
           </div>
 
-          <button type="subnit">login</button>
+          <button type="subnit">register</button>
         </form>
       </div>
     </section>
   );
 };
 
-export default Login;
+export default Register;
