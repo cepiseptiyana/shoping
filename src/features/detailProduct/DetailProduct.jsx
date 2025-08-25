@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "@/middleware/combineData/cartDataSlice.js";
 
 // thunk
 import { fetchProductById } from "@/middleware/combineData/combineDataThunk.js";
@@ -45,7 +44,7 @@ const DetailProduct = () => {
     };
 
     if (delivery != 0) {
-      dispatch(addCart(obectData));
+      // dispatch(addCart(obectData));
     } else {
       alert("please choice delivery");
     }

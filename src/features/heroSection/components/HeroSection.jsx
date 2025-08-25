@@ -1,7 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-
-// hooks global
-import { useProduct } from "@/hooks/useProduct";
+import { useEffect, useState } from "react";
 
 // utils
 import { images } from "../utils/hero.image";

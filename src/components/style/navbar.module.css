@@ -118,7 +118,7 @@
   }
 }
 
-@media only screen and (min-width: 640px) and (max-width: 768px) {
+@media only screen and (min-width: 640px) and (max-width: 900px) {
   .nav {
     display: flex;
     justify-content: space-around;
@@ -184,7 +184,7 @@
 
     & .wraperList {
       display: flex;
-      column-gap: 20px;
+      column-gap: 0;
 
       & .wraper {
         width: min(350px, 80vw);
@@ -210,7 +210,7 @@
       }
 
       & .figure {
-        order: 3;
+        order: 2;
         /* flex: 1; */
         display: flex;
         justify-content: end;
@@ -219,8 +219,12 @@
       }
 
       & .wraperLogin {
-        order: 2;
+        order: 3;
         font-size: 12px;
+
+        & .login {
+          display: none;
+        }
       }
     }
   }
