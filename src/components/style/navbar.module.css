@@ -5,7 +5,7 @@
   position: fixed;
   width: 100vw;
   z-index: 9999;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(34, 34, 34);
 
   & .header {
     /* flex: 1; */
@@ -53,6 +53,7 @@
     & .figure {
       /* flex: 1; */
       display: none;
+      color: white;
     }
 
     & .wraperLogin {
@@ -102,7 +103,6 @@
   .nav {
     display: flex;
     justify-content: space-around;
-    background-color: rgb(235, 235, 235);
 
     & .header {
       font-size: calc(var(--heading-size) - 5px);
@@ -122,7 +122,6 @@
   .nav {
     display: flex;
     justify-content: space-around;
-    background-color: rgb(235, 235, 235);
 
     & .header {
       font-size: calc(var(--heading-size) - 9px);
@@ -157,11 +156,16 @@
       }
 
       & .figure {
-        /* flex: 1; */
+        order: 3;
         display: flex;
         justify-content: end;
         align-items: center;
         padding: var(--padding-all);
+      }
+
+      & .wraperLogin {
+        order: 2;
+        font-size: 12px;
       }
     }
   }
@@ -171,7 +175,6 @@
   .nav {
     display: flex;
     justify-content: space-around;
-    background-color: rgb(235, 235, 235);
     position: fixed;
 
     & .header {
@@ -207,11 +210,17 @@
       }
 
       & .figure {
+        order: 3;
         /* flex: 1; */
         display: flex;
         justify-content: end;
         align-items: center;
         padding: var(--padding-all);
+      }
+
+      & .wraperLogin {
+        order: 2;
+        font-size: 12px;
       }
     }
   }

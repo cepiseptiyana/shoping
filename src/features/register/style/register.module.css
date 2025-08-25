@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   height: 100vh;
   display: flex;
   justify-content: space-evenly;
@@ -19,6 +20,10 @@
       box-shadow: 0 5px 20px black;
       /* background-color: red; */
       padding: 10px;
+
+      & h1 {
+        font-size: 18px;
+      }
 
       & img {
         width: 100%;
@@ -103,6 +108,73 @@
 
         &:hover {
           transform: scale(0.99);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .container {
+    height: auto;
+    flex-direction: column;
+
+    & .wraperLeft {
+      & .wraperImage {
+        width: 50%;
+        box-shadow: 0 5px 20px black;
+        /* background-color: red; */
+        padding: 10px;
+
+        & h1 {
+          font-size: 17px;
+        }
+
+        & img {
+          width: 100%;
+        }
+      }
+    }
+
+    & .wraperRight {
+      padding-top: 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+
+    & .wraperLeft {
+      & .wraperImage {
+        width: 90%;
+        box-shadow: 0 5px 20px black;
+        /* background-color: red; */
+        padding: 10px;
+
+        & img {
+          width: 100%;
+        }
+      }
+    }
+    & .wraperRight {
+      & form {
+        & .wraperInput {
+          width: 95%;
+          list-style-type: none;
+
+          & .username {
+            display: flex;
+            column-gap: 5px;
+          }
+
+          & li > input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+          }
         }
       }
     }
