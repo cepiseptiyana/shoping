@@ -4,9 +4,6 @@ import feather from "feather-icons";
 // components
 import AlertLogin from "./alert/AlertLogin";
 
-// hooks
-import { useUser } from "./hooks/useUser";
-
 // router
 import { Link } from "react-router";
 
@@ -14,19 +11,18 @@ import { Link } from "react-router";
 import style from "./style/navbar.module.css";
 
 // redux
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addQuantity,
-  totalCheckout,
-  reduceQuantity,
-  changeQuantity,
-  resetTotalCheckouts,
-} from "@/middleware/combineData/cartDataSlice.js";
+import { useSelector } from "react-redux";
 
 const NavbarComponent = () => {
-  const dispatch = useDispatch();
-  const { alertLog, user } = useSelector((state) => state.alertLogin);
+  const data = localStorage.getItem("userProfile");
+  const parsedData = JSON.parse(data);
+  const { alertLog } = useSelector((state) => state.alertLogin);
   const [closeFilter, setCloseFilter] = useState(false);
+
+  function handleLogout() {
+    localStorage.removeItem("userProfile");
+    window.location.reload();
+  }
 
   return (
     <>
@@ -69,12 +65,11 @@ const NavbarComponent = () => {
               }}
               onClick={() => {
                 setCloseFilter(!closeFilter);
-                dispatch(resetTotalCheckouts());
               }}
             />
           </figure>
 
-          {user.length == 0 ? (
+          {!parsedData ? (
             <div className={style.wraperLogin}>
               <div className={style.register}>
                 <Link className={style.link} to="/register">
@@ -89,34 +84,20 @@ const NavbarComponent = () => {
             </div>
           ) : (
             <div className={style.wraperLogin}>
-              <div className={style.register}>
-                <div className={style.link}>logout</div>
-              </div>
               <div className={style.login}>
                 <div className={style.link} to="/">
-                  {user}
+                  {parsedData.username}
                 </div>
+              </div>
+
+              <div className={style.register} onClick={handleLogout}>
+                <div className={style.link}>logout</div>
               </div>
             </div>
           )}
         </div>
 
         {alertLog.length != 0 && <AlertLogin alert={alertLog} />}
-
-        {/* <Cart
-          showTotalCheckout={showTotalCheckout}
-          showCart={showCart}
-          translatecss={translatecss}
-          data={data}
-          empty={empty}
-          totalCheckouts={totalCheckouts}
-          totalCheckoutsButton={totalCheckoutsButton}
-          handleChangeQuantity={handleChangeQuantity}
-          handleTranslateDelete={handleTranslateDelete}
-          handleAddQuantity={handleAddQuantity}
-          handleReduceQuantity={handleReduceQuantity}
-          handleTotalCheckout={handleTotalCheckout}
-        /> */}
       </nav>
     </>
   );

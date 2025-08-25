@@ -1,14 +1,6 @@
 // features
 import ProductFilter from "@/features/productFilter/ProductFilter.jsx";
 
-// features components
-import { useEffect, useState } from "react";
-
-// feature
-import HeroSection from "../features/heroSection/Hero.jsx";
-import Product from "../features/productCard/ProductCard.jsx";
-import HighlightsMenu from "../features/HighlightsMenu/HighlightsMenu.jsx";
-
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCombinedData } from "@/middleware/combineData/combineDataThunk.js";
@@ -16,9 +8,7 @@ import {
   setPage,
   setSortOption,
   setFilterCheckbox,
-  setDeleteFilter,
   resetData,
-  setFilter,
 } from "@/middleware/combineData/combineDataSlice.js";
 
 // react router

@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  fetchCombinedData,
-  fetchDataHighlight,
-  fetchLogin,
-  fetchRegister,
-} from "./combineDataThunk";
+import { fetchCombinedData, fetchDataHighlight } from "./combineDataThunk";
 
 const combinedDataSlice = createSlice({
   name: "combinedData",
@@ -99,7 +94,6 @@ const combinedDataSlice = createSlice({
       .addCase(fetchCombinedData.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload.products;
-        state.dataSort = action.payload.products;
         state.total = action.payload.total;
       })
       .addCase(fetchCombinedData.rejected, (state, action) => {
@@ -118,38 +112,6 @@ const combinedDataSlice = createSlice({
         state.dataHighLightFilter = action.payload.products;
       })
       .addCase(fetchDataHighlight.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-
-    // login
-    builder
-      .addCase(fetchLogin.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchLogin.fulfilled, (state, action) => {
-        state.loading = false;
-        // console.log(action.payload);
-        // state.users = action.payload;
-      })
-      .addCase(fetchLogin.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-
-    // register
-    builder
-      .addCase(fetchRegister.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.loading = false;
-        // console.log(action.payload);
-        // state.users = action.payload;
-      })
-      .addCase(fetchRegister.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

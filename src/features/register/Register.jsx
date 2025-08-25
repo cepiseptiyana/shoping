@@ -11,21 +11,13 @@ import image from "@/assets/loginImage.jpg";
 import gmail from "@/assets/gmail.svg";
 import github from "@/assets/github.svg";
 
-// router
-import { useNavigate } from "react-router";
-
 // style
 import style from "./style/register.module.css";
 
 // redux
 import { useDispatch } from "react-redux";
-import {
-  fetchLogin,
-  fetchRegister,
-} from "@/middleware/combineData/combineDataThunk";
 
 const Register = () => {
-  const [isLogin, setIstLogin] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

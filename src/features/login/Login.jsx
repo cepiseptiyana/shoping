@@ -45,14 +45,12 @@ const Login = () => {
 
         const result = await res.json();
         if (!res.ok) {
-          console.log(result);
           setValidasi(result.message);
           return;
         }
 
-        dispatch(
-          handleAlert({ message: "success login", user: result.message })
-        );
+        dispatch(handleAlert({ message: result.message }));
+        localStorage.setItem("userProfile", JSON.stringify(result));
         navigate("/");
 
         setTimeout(() => {

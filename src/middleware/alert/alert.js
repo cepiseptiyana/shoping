@@ -4,14 +4,12 @@ const alertLogin = createSlice({
   name: "alertLogin",
   initialState: {
     alertLog: "",
-    user: "",
   },
 
   reducers: {
     handleAlert: (state, action) => {
-      const { message, user } = action.payload;
+      const { message } = action.payload;
       state.alertLog = message;
-      state.user = user;
     },
 
     clearAlert: (state) => {
