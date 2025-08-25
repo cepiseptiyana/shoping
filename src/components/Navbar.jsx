@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import feather from "feather-icons";
 
 // components
-import Cart from "./cart/Cart";
+import AlertLogin from "./alert/AlertLogin";
 
 // hooks
 import { useUser } from "./hooks/useUser";
@@ -24,77 +24,9 @@ import {
 } from "@/middleware/combineData/cartDataSlice.js";
 
 const NavbarComponent = () => {
-  // const { user, loading, error } = useUser();
   const dispatch = useDispatch();
-  const [image, setImage] = useState(null);
+  const { alertLog, user } = useSelector((state) => state.alertLogin);
   const [closeFilter, setCloseFilter] = useState(false);
-  const { data, empty, totalCheckouts, totalCheckoutsButton, countCart } =
-    useSelector((state) => state.cartData);
-
-  const [translatecss, setTranslatecss] = useState(false);
-  const [checked, setChecked] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [showTotalCheckout, setShowTotalCheckout] = useState(false);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     console.log(user);
-  //     setImage(user.picture);
-  //   }
-  // }, [user]);
-
-  function handleAddQuantity(data) {
-    const { quantity, id, size, delivery } = data;
-    const incrementQuantity = quantity + 1;
-
-    const totalDelivery = parseFloat((delivery * incrementQuantity).toFixed(2));
-    dispatch(
-      addQuantity({
-        id,
-        quantity: incrementQuantity,
-        size,
-        totalDelivery,
-        checked,
-        delivery,
-      })
-    );
-  }
-
-  function handleReduceQuantity(data) {
-    const { quantity, id, size, delivery, totalDelivery } = data;
-    const decrementQuantity = quantity - 1;
-
-    const newTotalDelivery = parseFloat((totalDelivery - delivery).toFixed(2));
-    dispatch(
-      reduceQuantity({
-        id,
-        quantity: decrementQuantity,
-        size,
-        newTotalDelivery,
-        checked,
-        delivery,
-      })
-    );
-  }
-
-  function handleChangeQuantity(data, quantity) {
-    const { id, size, delivery } = data;
-    const totalDelivery = parseFloat((delivery * quantity).toFixed(2));
-    dispatch(
-      changeQuantity({ id, size, totalDelivery, quantity, checked, delivery })
-    );
-  }
-
-  function handleTotalCheckout(event, id, size, delivery) {
-    const checked = event.target.checked;
-    setShowTotalCheckout(true);
-    setChecked(checked);
-    dispatch(totalCheckout({ id, size, checked, delivery }));
-  }
-
-  function handleTranslateDelete() {
-    setTranslatecss(true);
-  }
 
   return (
     <>
@@ -136,26 +68,40 @@ const NavbarComponent = () => {
                   : feather.icons["menu"].toSvg(),
               }}
               onClick={() => {
-                setShowCart(false);
                 setCloseFilter(!closeFilter);
                 dispatch(resetTotalCheckouts());
               }}
             />
           </figure>
 
-          <div className={style.wraperLogin}>
-            <div className={style.register}>
-              <Link className={style.link} to="/register">
-                register
-              </Link>
+          {user.length == 0 ? (
+            <div className={style.wraperLogin}>
+              <div className={style.register}>
+                <Link className={style.link} to="/register">
+                  register
+                </Link>
+              </div>
+              <div className={style.login}>
+                <Link className={style.link} to="/login">
+                  login
+                </Link>
+              </div>
             </div>
-            <div className={style.login}>
-              <Link className={style.link} to="/login">
-                login
-              </Link>
+          ) : (
+            <div className={style.wraperLogin}>
+              <div className={style.register}>
+                <div className={style.link}>logout</div>
+              </div>
+              <div className={style.login}>
+                <div className={style.link} to="/">
+                  {user}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
+
+        {alertLog.length != 0 && <AlertLogin alert={alertLog} />}
 
         {/* <Cart
           showTotalCheckout={showTotalCheckout}

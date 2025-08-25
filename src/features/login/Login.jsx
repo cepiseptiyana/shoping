@@ -1,35 +1,70 @@
 // componenst
 import { useState } from "react";
+import Validation from "./alert/Validation.jsx";
 
 // router
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 // Assets
 import image from "@/assets/loginImage.jpg";
 import gmail from "@/assets/gmail.svg";
 import github from "@/assets/github.svg";
 
-// router
-import { useNavigate } from "react-router";
-
 // style
 import style from "./style/login.module.css";
 
 // redux
-import { useDispatch } from "react-redux";
-import {
-  fetchLogin,
-  fetchRegister,
-} from "../../middleware/combineData/combineDataThunk";
+import { useDispatch, useSelector } from "react-redux";
+import { handleAlert, clearAlert } from "../../middleware/alert/alert.js";
 
 const Login = () => {
-  const [isLogin, setIstLogin] = useState(true);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [showTabsInput, setShowTabsInput] = useState(true);
+  const [password, setPassword] = useState("");
+  const [validasi, setValidasi] = useState("");
+
+  const { alertLog } = useSelector((state) => state.alertLogin);
 
   const dispatch = useDispatch();
+
+  async function handleForm(e) {
+    e.preventDefault();
+
+    if (email.length > 3 && password.length > 3) {
+      try {
+        const res = await fetch("https://shopping-api-omega.vercel.app/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+
+        const result = await res.json();
+        if (!res.ok) {
+          console.log(result);
+          setValidasi(result.message);
+          return;
+        }
+
+        dispatch(
+          handleAlert({ message: "success login", user: result.message })
+        );
+        navigate("/");
+
+        setTimeout(() => {
+          dispatch(clearAlert());
+        }, 5000);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setValidasi("isi dengan lengkap");
+    }
+  }
 
   return (
     <section className={style.container}>
@@ -42,7 +77,7 @@ const Login = () => {
       </div>
 
       <div className={style.wraperRight}>
-        <form action="">
+        <form action="" onSubmit={handleForm}>
           <div className={style.header}>
             Don't have an account ?{" "}
             <Link to="/register" className={style.register}>
@@ -50,15 +85,28 @@ const Login = () => {
             </Link>
           </div>
 
+          {alertLog.length != 0 && <Validation validasi={alertLog} />}
+          {validasi.length != 0 && <Validation validasi={validasi} />}
+
           <h1>sign in to Shooping</h1>
           <p>Enter your detail below.</p>
 
           <ul className={style.wraperInput}>
             <li>
-              <input type="email" placeholder="Email Address" />
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </li>
             <li>
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </li>
           </ul>
 
