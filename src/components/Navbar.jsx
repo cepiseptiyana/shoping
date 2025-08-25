@@ -7,7 +7,8 @@ import Cart from "./cart/Cart";
 // hooks
 import { useUser } from "./hooks/useUser";
 
-import { href, Link } from "react-router";
+// router
+import { Link } from "react-router";
 
 // style
 import style from "./style/navbar.module.css";
@@ -23,7 +24,7 @@ import {
 } from "@/middleware/combineData/cartDataSlice.js";
 
 const NavbarComponent = () => {
-  const { user, loading, error } = useUser();
+  // const { user, loading, error } = useUser();
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [closeFilter, setCloseFilter] = useState(false);
@@ -35,12 +36,12 @@ const NavbarComponent = () => {
   const [showCart, setShowCart] = useState(false);
   const [showTotalCheckout, setShowTotalCheckout] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      console.log(user);
-      setImage(user.picture);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log(user);
+  //     setImage(user.picture);
+  //   }
+  // }, [user]);
 
   function handleAddQuantity(data) {
     const { quantity, id, size, delivery } = data;
@@ -102,93 +103,61 @@ const NavbarComponent = () => {
           <h1>shopping</h1>
         </header>
 
-        <ul className={`${style.wraper} ${!closeFilter ? "" : style.hide}`}>
-          <li className={style.item}>
-            <Link to="/">home</Link>
-          </li>
-          <li className={style.item}>
-            <Link to="/products">products</Link>
-          </li>
-          <li className={style.item}>
-            <Link to="/products">contact</Link>
-          </li>
-          <li className={style.item}>
-            <a href="product">about</a>
-          </li>
-        </ul>
+        <div className={style.wraperList}>
+          <ul className={`${style.wraper} ${closeFilter ? style.hide : ""}`}>
+            <li className={style.item}>
+              <Link className={style.link} to="/">
+                home
+              </Link>
+            </li>
+            <li className={style.item}>
+              <Link className={style.link} to="/products">
+                products
+              </Link>
+            </li>
+            <li className={style.item}>
+              <Link className={style.link} to="/products">
+                contact
+              </Link>
+            </li>
+            <li className={style.item}>
+              <Link className={style.link} to="/about">
+                contact
+              </Link>
+            </li>
+          </ul>
 
-        <figure className={style.figure}>
-          <div className={style.cartWraper}>
+          <figure className={style.figure}>
             <span
-              className={style.cart}
+              className={style.close}
               dangerouslySetInnerHTML={{
-                __html: feather.icons["shopping-cart"].toSvg(),
+                __html: closeFilter
+                  ? feather.icons["x"].toSvg()
+                  : feather.icons["menu"].toSvg(),
               }}
               onClick={() => {
-                setShowCart(!showCart);
-                setCloseFilter(false);
+                setShowCart(false);
+                setCloseFilter(!closeFilter);
                 dispatch(resetTotalCheckouts());
               }}
             />
-            {countCart != 0 ? <p>{countCart}</p> : null}
+          </figure>
+
+          <div className={style.wraperLogin}>
+            <div className={style.register}>
+              <Link className={style.link} to="/register">
+                register
+              </Link>
+            </div>
+            <div className={style.login}>
+              <Link className={style.link} to="/login">
+                login
+              </Link>
+            </div>
           </div>
-
-          <span
-            className={style.close}
-            dangerouslySetInnerHTML={{
-              __html: closeFilter
-                ? feather.icons["x"].toSvg()
-                : feather.icons["menu"].toSvg(),
-            }}
-            onClick={() => {
-              setShowCart(false);
-              setCloseFilter(!closeFilter);
-              dispatch(resetTotalCheckouts());
-            }}
-          />
-
-          {!user && (
-            <span
-              dangerouslySetInnerHTML={{
-                __html: feather.icons["log-in"].toSvg(),
-              }}
-              onClick={() => {
-                window.location.href =
-                  "https://login-auth0-iota.vercel.app/login";
-                // window.location.href = "http://localhost:3000/login";
-              }}
-            />
-          )}
-        </figure>
-
-        <div className={style.logout}>
-          <Link to="/profile">
-            <img
-              src={
-                user
-                  ? image
-                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              }
-              alt=""
-              width="30px"
-            />
-          </Link>
-
-          {user && (
-            <span
-              dangerouslySetInnerHTML={{
-                __html: feather.icons["log-out"].toSvg(),
-              }}
-              onClick={() => {
-                window.location.href =
-                  "https://login-auth0-iota.vercel.app/logout";
-                // window.location.href = "http://localhost:3000/logout";
-              }}
-            />
-          )}
         </div>
 
-        <Cart
+        {/* <Cart
           showTotalCheckout={showTotalCheckout}
           showCart={showCart}
           translatecss={translatecss}
@@ -201,7 +170,7 @@ const NavbarComponent = () => {
           handleAddQuantity={handleAddQuantity}
           handleReduceQuantity={handleReduceQuantity}
           handleTotalCheckout={handleTotalCheckout}
-        />
+        /> */}
       </nav>
     </>
   );

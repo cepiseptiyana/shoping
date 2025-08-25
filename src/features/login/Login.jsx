@@ -1,6 +1,13 @@
 // componenst
 import { useState } from "react";
-import Card from "./components/Card";
+
+// router
+import { Link } from "react-router";
+
+// Assets
+import image from "@/assets/loginImage.jpg";
+import gmail from "@/assets/gmail.svg";
+import github from "@/assets/github.svg";
 
 // router
 import { useNavigate } from "react-router";
@@ -24,86 +31,45 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  function handleChangeUsername(value) {
-    setUsername(value);
-  }
-
-  function handleChangePassword(value) {
-    setPassword(value);
-  }
-
-  function handleChangeEmail(value) {
-    setEmail(value);
-  }
-
-  function handleShowTabsInput(value) {
-    setShowTabsInput(value);
-  }
-
-  function handleIsLogin(value) {
-    setIstLogin(value);
-  }
-
-  function handleOnSubmit(event) {
-    event.preventDefault();
-    // console.log(isLogin);
-
-    if (isLogin) {
-      //   dispatch(fetchLogin({ username, password }));
-      if (username === "emilys" && password === "emilyspass") {
-        useNavigate("/");
-      }
-    } else {
-      // Validasi username
-      if (!username.trim()) {
-        alert("Username wajib diisi");
-        return;
-      }
-      if (username.length < 3) {
-        alert("Username minimal 3 karakter");
-        return;
-      }
-
-      // Validasi email
-      if (!email.trim()) {
-        alert("Email wajib diisi");
-        return;
-      }
-      if (!/\S+@\S+\.\S+/.test(email)) {
-        alert("Format email tidak valid");
-        return;
-      }
-
-      // Validasi password
-      if (!password.trim()) {
-        alert("Password wajib diisi");
-        return;
-      }
-      if (password.length < 6) {
-        alert("Password minimal 6 karakter");
-        return;
-      }
-
-      // Kalau semua validasi lolos
-      dispatch(fetchRegister({ username, email, password }));
-    }
-  }
-
   return (
     <section className={style.container}>
-      <Card
-        style={style}
-        username={username}
-        password={password}
-        email={email}
-        showTabsInput={showTabsInput}
-        handleOnSubmit={handleOnSubmit}
-        handleIsLogin={handleIsLogin}
-        handleChangeUsername={handleChangeUsername}
-        handleChangePassword={handleChangePassword}
-        handleChangeEmail={handleChangeEmail}
-        handleShowTabsInput={handleShowTabsInput}
-      />
+      <div className={style.wraperLeft}>
+        <div className={style.wraperImage}>
+          <h1>shooping</h1>
+          <h1>Hi, Welcome Back</h1>
+          <img src={image} alt="" />
+        </div>
+      </div>
+
+      <div className={style.wraperRight}>
+        <form action="">
+          <div className={style.header}>
+            Don't have an account ?{" "}
+            <Link to="/register" className={style.register}>
+              register
+            </Link>
+          </div>
+
+          <h1>sign in to Shooping</h1>
+          <p>Enter your detail below.</p>
+
+          <ul className={style.wraperInput}>
+            <li>
+              <input type="email" placeholder="Email Address" />
+            </li>
+            <li>
+              <input type="password" placeholder="Password" />
+            </li>
+          </ul>
+
+          <div className={style.provider}>
+            <img src={gmail} alt="" />
+            <img src={github} alt="" />
+          </div>
+
+          <button type="subnit">login</button>
+        </form>
+      </div>
     </section>
   );
 };
