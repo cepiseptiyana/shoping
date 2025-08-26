@@ -53,9 +53,9 @@ const Login = () => {
         localStorage.setItem("userProfile", JSON.stringify(result));
         navigate("/");
 
-        // setTimeout(() => {
-        //   dispatch(clearAlert());
-        // }, 5000);
+        setTimeout(() => {
+          dispatch(clearAlert());
+        }, 3000);
       } catch (err) {
         console.log(err);
       }
