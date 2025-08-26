@@ -5,10 +5,6 @@ const productDetailSlice = createSlice({
   name: "productDetail",
   initialState: {
     data: [],
-    dataFilter: [],
-    currentPage: 1,
-    total: 0,
-    limit: 20,
     loadingDetail: true,
     errorDetail: null,
   },

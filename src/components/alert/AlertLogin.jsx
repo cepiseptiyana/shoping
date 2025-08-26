@@ -2,14 +2,15 @@ import Swal from "sweetalert2";
 
 import { useEffect } from "react";
 
-const AlertLogin = ({ alert }) => {
+const AlertLogin = ({ alert, icon }) => {
   useEffect(() => {
     Swal.fire({
       title: "Selamat Datang!",
       text: alert,
-      icon: "success",
+      icon: icon,
       confirmButtonText: "Oke",
       timer: 3000,
+      confirmButtonText: "OK",
     });
   }, []);
 };

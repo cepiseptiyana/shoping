@@ -37,7 +37,7 @@ const ProductCard = (props) => {
           <h1>My Products</h1>
         </header>
 
-        {/* <Card products={data} style={style} handleNavigasi={handleNavigasi} /> */}
+        <Card products={data} style={style} handleNavigasi={handleNavigasi} />
       </section>
     </>
   );

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
+// sweetalert
+import Swal from "sweetalert2";
+
 // redux
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,17 +19,27 @@ import Loading from "../../components/loading/Loading";
 import style from "./style/style.module.css";
 
 const DetailProduct = () => {
+  const userProfileStorage = JSON.parse(localStorage.getItem("userProfile"));
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data, loadingDetail } = useSelector((state) => state.productDetail);
 
   const [size, setSize] = useState("L");
   const [quantity, setquantity] = useState(0);
-  const [delivery, setDelivery] = useState(0);
+  const [delivery, setDelivery] = useState({});
 
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
+
+  function showAlert(text) {
+    Swal.fire({
+      title: "warning!",
+      text: text,
+      icon: "warning",
+      confirmButtonText: "OK",
+    });
+  }
 
   function handleAddToCart(e) {
     e.preventDefault();
@@ -38,24 +51,29 @@ const DetailProduct = () => {
       stock: data.stock,
       size,
       quantity,
-      delivery: parseFloat(delivery),
+      delivery: parseFloat(delivery.price),
+      typeDelivery: delivery.type,
       image: data.thumbnail,
-      totalDelivery: parseFloat((parseFloat(delivery) * quantity).toFixed(2)),
+      totalDelivery: parseFloat(
+        (parseFloat(delivery.price) * quantity).toFixed(2)
+      ),
     };
 
-    if (delivery != 0) {
-      // dispatch(addCart(obectData));
-    } else {
-      alert("please choice delivery");
-    }
+    if (Object.keys(delivery).length == 0)
+      return showAlert("please choice delivery");
+
+    if (userProfileStorage == null)
+      return showAlert("please login terlebih dahulu");
+
+    console.log(obectData);
   }
 
   function handleChangeSize(e) {
     setSize(e.target.value);
   }
 
-  function handleChangeDelivery(value) {
-    setDelivery(value);
+  function handleChangeDelivery({ price, type }) {
+    setDelivery({ price, type });
   }
 
   function handleChangeQuantity(value) {
