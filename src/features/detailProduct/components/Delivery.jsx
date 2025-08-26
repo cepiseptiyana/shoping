@@ -31,21 +31,31 @@ const Delivery = (props) => {
                 id="standard"
                 name="fav_language"
                 value={data.price}
-                onChange={(e) => handleChangeDelivery(e.target.value)}
+                onChange={(e) =>
+                  handleChangeDelivery({
+                    price: e.target.value,
+                    type: "standard delivery",
+                  })
+                }
               />
             </td>
           </tr>
           <tr>
             <td>express delivery</td>
             <td>1 - 4 days</td>
-            <td>${data.price + 3}</td>
+            <td>${parseFloat(data.price + 3).toFixed(2)}</td>
             <td>
               <input
                 type="radio"
                 id="express"
                 name="fav_language"
-                value={data.price + 5}
-                onChange={(e) => handleChangeDelivery(e.target.value)}
+                value={parseFloat(data.price + 3).toFixed(2)}
+                onChange={(e) =>
+                  handleChangeDelivery({
+                    price: e.target.value,
+                    type: "express delivery",
+                  })
+                }
               />
             </td>
           </tr>

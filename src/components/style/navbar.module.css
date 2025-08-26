@@ -17,15 +17,23 @@
     font-family: var(--font-family);
     padding: var(--padding-all);
     letter-spacing: 10px;
+
+    & h1 {
+      margin: 0;
+    }
   }
 
   & .wraperList {
     display: flex;
+    height: 80px;
+    align-items: center;
     column-gap: 20px;
     font-family: sans-serif;
+    /* background-color: red; */
 
     & .wraper {
-      /* flex: 1; */
+      margin: 0; /* hilangkan margin default ul */
+      padding: 0; /* hilangkan padding default ul */
       list-style-type: none;
       display: flex;
       justify-content: center;
@@ -54,6 +62,7 @@
       /* flex: 1; */
       display: none;
       color: white;
+      margin: 0;
     }
 
     & .wraperLogin {

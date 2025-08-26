@@ -1,0 +1,37 @@
+.container {
+  width: 400px;
+  background-color: blue;
+  font-family: sans-serif;
+  font-size: 15px;
+  text-transform: capitalize;
+
+  & .wraper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 1px solid black;
+
+    & .price,
+    & .delivery,
+    & .total {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    & .input {
+      width: 100%;
+      background-color: red;
+
+      & button {
+        text-transform: capitalize;
+        font-size: 18px;
+        cursor: pointer;
+        display: block;
+        padding: 10px;
+        width: 100%;
+      }
+    }
+  }
+}

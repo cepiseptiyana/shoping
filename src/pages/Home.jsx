@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <>
-      {alertLog.length != 0 && <AlertLogin alert={alertLog} />}
+      {alertLog.length != 0 && <AlertLogin alert={alertLog} icon="success" />}
 
       <HeroSection />
       <HighlightsMenu
