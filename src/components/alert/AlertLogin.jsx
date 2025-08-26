@@ -1,7 +1,17 @@
-import style from "../style/alertLogin.module.css";
+import Swal from "sweetalert2";
+
+import { useEffect } from "react";
 
 const AlertLogin = ({ alert }) => {
-  return <h1 className={style.header}>{alert}</h1>;
+  useEffect(() => {
+    Swal.fire({
+      title: "Selamat Datang!",
+      text: alert,
+      icon: "success",
+      confirmButtonText: "Oke",
+      timer: 3000,
+    });
+  }, []);
 };
 
 export default AlertLogin;

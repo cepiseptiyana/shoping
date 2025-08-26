@@ -38,13 +38,13 @@ const Delivery = (props) => {
           <tr>
             <td>express delivery</td>
             <td>1 - 4 days</td>
-            <td>${data.price + 200}</td>
+            <td>${data.price + 3}</td>
             <td>
               <input
                 type="radio"
                 id="express"
                 name="fav_language"
-                value={data.price + 200}
+                value={data.price + 5}
                 onChange={(e) => handleChangeDelivery(e.target.value)}
               />
             </td>

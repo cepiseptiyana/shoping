@@ -6,6 +6,7 @@ import AuthLayout from "./layouts/AuthLayout.jsx";
 
 import HomePage from "./pages/Home.jsx";
 import Products from "./pages/Products.jsx";
+import MyProducts from "./pages/MyProducts.jsx";
 import DetailProduct from "./pages/Detail.jsx";
 
 import Login from "./features/login/Login.jsx";
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: HomePage },
       { path: "products", Component: Products },
+      { path: "myProducts", Component: MyProducts },
       { path: "products/:category", Component: Products },
       { path: "detail/:id", Component: DetailProduct },
     ],

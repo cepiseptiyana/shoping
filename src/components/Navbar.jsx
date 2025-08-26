@@ -10,13 +10,9 @@ import { Link } from "react-router";
 // style
 import style from "./style/navbar.module.css";
 
-// redux
-import { useSelector } from "react-redux";
-
 const NavbarComponent = () => {
   const data = localStorage.getItem("userProfile");
   const parsedData = JSON.parse(data);
-  const { alertLog } = useSelector((state) => state.alertLogin);
   const [closeFilter, setCloseFilter] = useState(false);
 
   function handleLogout() {
@@ -44,8 +40,8 @@ const NavbarComponent = () => {
               </Link>
             </li>
             <li className={style.item}>
-              <Link className={style.link} to="/products">
-                contact
+              <Link className={style.link} to="/myProducts">
+                my products
               </Link>
             </li>
             <li className={style.item}>
@@ -96,8 +92,6 @@ const NavbarComponent = () => {
             </div>
           )}
         </div>
-
-        {alertLog.length != 0 && <AlertLogin alert={alertLog} />}
       </nav>
     </>
   );
