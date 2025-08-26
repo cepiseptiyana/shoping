@@ -1,6 +1,3 @@
-// component global
-import AlertLogin from "../components/alert/AlertLogin.jsx";
-
 // features
 import HeroSection from "../features/heroSection/components/HeroSection";
 import HighlightsMenu from "../features/HighlightsMenu/HighlightsMenu";
@@ -23,15 +20,12 @@ import { useNavigate } from "react-router";
 // global utils
 import { icons } from "@/utils/icons";
 
-const Home = () => {
+const MyProducts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { alertLog } = useSelector((state) => state.alertLogin);
 
   return (
     <>
-      {alertLog.length != 0 && <AlertLogin alert={alertLog} />}
-
       <HeroSection />
       <HighlightsMenu
         dispatch={dispatch}
@@ -52,4 +46,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MyProducts;

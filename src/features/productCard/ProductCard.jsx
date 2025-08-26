@@ -34,9 +34,10 @@ const ProductCard = (props) => {
     <>
       <section className={style.container}>
         <header className={style.header}>
-          <h1>categories</h1>
+          <h1>My Products</h1>
         </header>
-        <Card products={data} style={style} handleNavigasi={handleNavigasi} />
+
+        {/* <Card products={data} style={style} handleNavigasi={handleNavigasi} /> */}
       </section>
     </>
   );
