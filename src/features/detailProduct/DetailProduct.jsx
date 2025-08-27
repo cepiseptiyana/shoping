@@ -32,7 +32,7 @@ const DetailProduct = () => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
 
-  function showAlert(text) {
+  function showAlert(title, text) {
     Swal.fire({
       title: "warning!",
       text: text,
@@ -41,31 +41,49 @@ const DetailProduct = () => {
     });
   }
 
-  function handleAddToCart(e) {
+  async function handleAddToCart(e) {
     e.preventDefault();
 
     const obectData = {
-      id: data.id,
-      title: data.title,
-      price: data.price,
-      stock: data.stock,
-      size,
+      id_barang: data.id,
+      account_id,
+      name: data.title,
       quantity,
-      delivery: parseFloat(delivery.price),
-      typeDelivery: delivery.type,
+      price: data.price,
       image: data.thumbnail,
-      totalDelivery: parseFloat(
+      size,
+      stock: data.stock,
+      total_delivery: parseFloat(
         (parseFloat(delivery.price) * quantity).toFixed(2)
       ),
+      type_delivery: delivery.type,
     };
 
     if (Object.keys(delivery).length == 0)
-      return showAlert("please choice delivery");
+      return showAlert("warning!", "please choice delivery");
 
     if (userProfileStorage == null)
-      return showAlert("please login terlebih dahulu");
+      return showAlert("warning!", "please login terlebih dahulu");
 
-    console.log(obectData);
+    console.log(userProfileStorage);
+
+    // try {
+    //   const response = await fetch("http://localhost:3000/addCart", {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(obectData),
+    //   });
+
+    //   if (!response.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+    //   const result = await response.json();
+    //   // result.message = Added to cart successfully!
+    //   showAlert("success", "Added to cart successfully!");
+    // } catch (err) {
+    //   showAlert("failed", "failed Added to cart!");
+    // }
   }
 
   function handleChangeSize(e) {
