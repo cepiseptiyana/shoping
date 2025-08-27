@@ -1,5 +1,5 @@
 // component global
-import AlertLogin from "../components/alert/AlertLogin.jsx";
+import alertLogin from "../components/alert/alertLogins.js";
 
 // features
 import HeroSection from "../features/heroSection/components/HeroSection";
@@ -22,16 +22,19 @@ import { useNavigate } from "react-router";
 
 // global utils
 import { icons } from "@/utils/icons";
+import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { alertLog } = useSelector((state) => state.alertLogin);
 
+  useEffect(() => {
+    alertLog.length != 0 && alertLogin("Selamat Datang!", "welcome", "success");
+  }, [alertLog]);
+
   return (
     <>
-      {alertLog.length != 0 && <AlertLogin alert={alertLog} icon="success" />}
-
       <HeroSection />
       <HighlightsMenu
         dispatch={dispatch}

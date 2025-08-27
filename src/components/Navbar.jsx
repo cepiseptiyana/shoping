@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import feather from "feather-icons";
 
-// components
-import AlertLogin from "./alert/AlertLogin";
-
 // router
 import { Link } from "react-router";
 

@@ -1,6 +1,7 @@
 // componenst
 import { useState } from "react";
-import Validation from "./alert/Validation.jsx";
+// import Validation from "./alert/Validation.jsx";
+import alertLogin from "../../components/alert/alertLogins.js";
 
 // router
 import { Link, useNavigate } from "react-router";
@@ -21,10 +22,7 @@ const Login = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validasi, setValidasi] = useState("");
-
-  const { alertLog } = useSelector((state) => state.alertLogin);
-
+  // const { alertLog } = useSelector((state) => state.alertLogin);
   const dispatch = useDispatch();
 
   async function handleForm(e) {
@@ -32,6 +30,7 @@ const Login = () => {
 
     if (email.length > 3 && password.length > 3) {
       try {
+        // "https://shopping-api-omega.vercel.app/login"
         const res = await fetch("https://shopping-api-omega.vercel.app/login", {
           method: "POST",
           headers: {
@@ -45,7 +44,7 @@ const Login = () => {
 
         const result = await res.json();
         if (!res.ok) {
-          setValidasi(result.message);
+          alertLogin("failed", result.message, "error");
           return;
         }
 
@@ -60,7 +59,7 @@ const Login = () => {
         console.log(err);
       }
     } else {
-      setValidasi("isi dengan lengkap");
+      alertLogin("warning", "isi dengan lengkap", "warning");
     }
   }
 
@@ -83,8 +82,7 @@ const Login = () => {
             </Link>
           </div>
 
-          {alertLog.length != 0 && <Validation validasi={alertLog} />}
-          {validasi.length != 0 && <Validation validasi={validasi} />}
+          {/* {alertLog.length != 0 && <Validation validasi={alertLog} />} */}
 
           <h1>sign in to Shooping</h1>
           <p>Enter your detail below.</p>
