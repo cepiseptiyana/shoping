@@ -1,7 +1,7 @@
 // componenst
 import { useState } from "react";
 // import Validation from "./alert/Validation.jsx";
-import alertLogin from "../../components/alert/alertLogins.js";
+import sweetAlert from "../../components/alert/alert.js";
 
 // router
 import { Link, useNavigate } from "react-router";
@@ -22,7 +22,6 @@ const Login = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const { alertLog } = useSelector((state) => state.alertLogin);
   const dispatch = useDispatch();
 
   async function handleForm(e) {
@@ -31,7 +30,7 @@ const Login = () => {
     if (email.length > 3 && password.length > 3) {
       try {
         // "https://shopping-api-omega.vercel.app/login"
-        const res = await fetch("https://shopping-api-omega.vercel.app/login", {
+        const res = await fetch("http://localhost:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +43,7 @@ const Login = () => {
 
         const result = await res.json();
         if (!res.ok) {
-          alertLogin("failed", result.message, "error");
+          sweetAlert("failed", result.message, "error");
           return;
         }
 
@@ -59,7 +58,7 @@ const Login = () => {
         console.log(err);
       }
     } else {
-      alertLogin("warning", "isi dengan lengkap", "warning");
+      sweetAlert("warning", "isi dengan lengkap", "warning");
     }
   }
 

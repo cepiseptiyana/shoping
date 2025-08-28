@@ -1,23 +1,42 @@
 .card {
-  width: 700px;
+  flex: 1;
   display: flex;
-  justify-content: space-between;
-  background-color: green;
+  flex-direction: column;
+  /* background-color: rgb(255, 191, 0); */
+  row-gap: 5px;
   font-family: sans-serif;
   font-size: 15px;
   text-transform: capitalize;
+  padding-top: 10px;
+
+  & .wraper {
+    width: 100%;
+    border-top: 1px solid gray;
+    display: flex;
+  }
 
   & .wraperImage {
+    /* background-color: yellow; */
     flex: 1;
+
+    & img {
+      display: block;
+      width: 65%;
+      margin: auto;
+    }
   }
 
   & .wraperDetail {
+    padding-top: 10px;
     flex: 1;
+    font-size: 13px;
+    /* text-align: center; */
+    white-space: nowrap;
     /* padding: 10px; */
     display: flex;
     flex-direction: column;
     row-gap: 15px;
-    background-color: pink;
+    /* background-color: pink; */
 
     & .wraperNameProduct {
       display: flex;
@@ -39,10 +58,103 @@
         column-gap: 10px;
 
         & input {
+          background-color: red;
+          color: white;
+          border: 1px solid black;
+          text-align: center;
           width: 20px;
           height: 17px;
         }
       }
+    }
+
+    & button {
+      cursor: pointer;
+      font-size: 12px;
+      color: white;
+      border: 1px solid gray;
+      background-color: rgb(0, 162, 255);
+      text-transform: capitalize;
+      padding: 0 20px;
+
+      &:active {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    font-family: sans-serif;
+    text-transform: capitalize;
+
+    & .wraper {
+      width: 100%;
+      display: flex;
+    }
+
+    & .wraperImage {
+      flex: 1;
+
+      & img {
+        display: block;
+        width: 65%;
+        margin: auto;
+      }
+    }
+
+    & .wraperDetail {
+      flex: 1;
+      font-size: 12.3px;
+      /* text-align: center; */
+      white-space: nowrap;
+      /* padding: 10px; */
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+
+      & .wraperNameProduct {
+        display: flex;
+        justify-content: space-between;
+
+        & .delete svg {
+          width: 20px;
+        }
+      }
+
+      & .wraperIdr {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      & .wraperQuantity {
+        display: flex;
+        justify-content: space-between;
+
+        & .quantity {
+          display: flex;
+          align-items: center;
+          column-gap: 10px;
+
+          & input {
+            background-color: red;
+            color: white;
+            border: 1px solid black;
+            text-align: center;
+            width: 20px;
+            height: 17px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .card {
+    & .wraper {
+      flex-direction: column;
     }
   }
 }

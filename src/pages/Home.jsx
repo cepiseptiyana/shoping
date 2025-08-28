@@ -1,5 +1,6 @@
 // component global
-import alertLogin from "../components/alert/alertLogins.js";
+// alert
+import alert from "../components/alert/alert.js";
 
 // features
 import HeroSection from "../features/heroSection/components/HeroSection";
@@ -30,7 +31,7 @@ const Home = () => {
   const { alertLog } = useSelector((state) => state.alertLogin);
 
   useEffect(() => {
-    alertLog.length != 0 && alertLogin("Selamat Datang!", "welcome", "success");
+    alertLog.length != 0 && alert("Selamat Datang!", "welcome", "success");
   }, [alertLog]);
 
   return (

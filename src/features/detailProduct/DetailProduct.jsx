@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-// sweetalert
-import Swal from "sweetalert2";
+// alert
+import sweetAlert from "../../components/alert/alert";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -32,21 +32,12 @@ const DetailProduct = () => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
 
-  function showAlert(title, text) {
-    Swal.fire({
-      title: "warning!",
-      text: text,
-      icon: "warning",
-      confirmButtonText: "OK",
-    });
-  }
-
   async function handleAddToCart(e) {
     e.preventDefault();
 
     const obectData = {
       id_barang: data.id,
-      account_id,
+      account_id: userProfileStorage.account_id,
       name: data.title,
       quantity,
       price: data.price,
@@ -60,30 +51,28 @@ const DetailProduct = () => {
     };
 
     if (Object.keys(delivery).length == 0)
-      return showAlert("warning!", "please choice delivery");
+      return sweetAlert("warning!", "please choice delivery", "warning");
 
     if (userProfileStorage == null)
-      return showAlert("warning!", "please login terlebih dahulu");
+      return sweetAlert("warning!", "please login terlebih dahulu");
 
-    console.log(userProfileStorage);
+    try {
+      const response = await fetch("http://localhost:3000/addCart", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obectData),
+      });
 
-    // try {
-    //   const response = await fetch("http://localhost:3000/addCart", {
-    //     method: "post",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(obectData),
-    //   });
+      if (!response.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-    //   if (!response.ok) throw new Error(`HTTP error! status: ${res.status}`);
-
-    //   const result = await response.json();
-    //   // result.message = Added to cart successfully!
-    //   showAlert("success", "Added to cart successfully!");
-    // } catch (err) {
-    //   showAlert("failed", "failed Added to cart!");
-    // }
+      const result = await response.json();
+      // console.log(result);
+      sweetAlert("success", result.message, "success");
+    } catch (err) {
+      sweetAlert("failed", "failed Added to cart!", "error");
+    }
   }
 
   function handleChangeSize(e) {

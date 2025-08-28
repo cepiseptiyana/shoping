@@ -7,13 +7,19 @@ import { Link } from "react-router";
 // style
 import style from "./style/navbar.module.css";
 
+// redux
+import { clear } from "../middleware/myProducts/myProductsSlice";
+import { useDispatch } from "react-redux";
+
 const NavbarComponent = () => {
   const data = localStorage.getItem("userProfile");
+  const dispatch = useDispatch();
   const parsedData = JSON.parse(data);
   const [closeFilter, setCloseFilter] = useState(false);
 
   function handleLogout() {
     localStorage.removeItem("userProfile");
+    dispatch(clear());
     window.location.reload();
   }
 
