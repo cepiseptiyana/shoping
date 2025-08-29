@@ -57,13 +57,16 @@ const DetailProduct = () => {
       return sweetAlert("warning!", "please login terlebih dahulu");
 
     try {
-      const response = await fetch("http://localhost:3000/addCart", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obectData),
-      });
+      const response = await fetch(
+        "https://shopping-api-omega.vercel.app/addCart",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obectData),
+        }
+      );
 
       if (!response.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
