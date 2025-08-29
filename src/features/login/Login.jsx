@@ -30,7 +30,7 @@ const Login = () => {
     if (email.length > 3 && password.length > 3) {
       try {
         // "https://shopping-api-omega.vercel.app/login"
-        const res = await fetch("http://localhost:3000/login", {
+        const res = await fetch("https://shopping-api-omega.vercel.app/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

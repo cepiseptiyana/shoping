@@ -1,6 +1,8 @@
 // componenst
 import { useState } from "react";
 import RegisterSuccess from "./alert/RegisterSuccess";
+import sweetAlert from "@/components/alert/alert.js";
+
 import Validation from "./alert/Validation";
 
 // router
@@ -23,7 +25,6 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState([]);
-  const [validasi, setValidasi] = useState("");
 
   const dispatch = useDispatch();
 
@@ -48,21 +49,30 @@ const Register = () => {
                 }),
               }
             );
+
+            // kalau status bukan 200-299
+            if (!res.ok) {
+              const errorData = await res.json();
+              return sweetAlert(
+                "information",
+                errorData.message || "Something went wrong",
+                "error"
+              );
+            }
+
             const result = await res.json();
-            // console.log(result);
-            setValidasi("");
-            setRegister([result]);
+            sweetAlert("informaiton", result.message, "success");
           } catch (err) {
-            console.log(err);
+            sweetAlert("informaiton", err.message, "error");
           }
         } else {
-          setValidasi("isi password minimal 5 karakter");
+          sweetAlert("informaiton", "isi password minimal 5 karakter", "info");
         }
       } else {
-        setValidasi("isi email minimal 3 karakter");
+        sweetAlert("informaiton", "isi email minimal 3 karakter", "info");
       }
     } else {
-      setValidasi("isi username minimal 4 karakter");
+      sweetAlert("informaiton", "isi username minimal 4 karakter", "info");
     }
   }
 
@@ -86,7 +96,6 @@ const Register = () => {
           </div>
 
           {register.length != 0 && <RegisterSuccess register={register} />}
-          {validasi.length != 0 && <Validation validasi={validasi} />}
 
           <h1>sign in to Shooping</h1>
           <p>Enter your detail below.</p>
